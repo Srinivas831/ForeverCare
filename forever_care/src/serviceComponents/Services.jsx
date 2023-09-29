@@ -7,7 +7,6 @@ import React, { useState } from 'react'
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { serviceData } from '../reduxService/actionService';
-import { useNavigate } from "react-router-dom"
 
 
 export const Services = () => {
