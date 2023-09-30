@@ -161,7 +161,7 @@ export default function NavBar(){
                 </MenuList>
               </Menu>
             ) : (
-              <Link key={"login"} to="/login" >
+              <Link key={"login"} to="/signup" >
                 <ChakraLink
                 px={2}
                 py={1}
