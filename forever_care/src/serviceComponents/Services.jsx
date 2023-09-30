@@ -3,11 +3,11 @@ import {
   Button, Stack
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { serviceData } from '../reduxService/actionService';
-
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export const Services = () => {
   const imageArray = [
@@ -22,8 +22,10 @@ export const Services = () => {
   const dispatch = useDispatch();
   const [item] = useState(imageArray);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [names, setNames] = useState("")
-  const [location, setLocation] = useState("")
+  let nav=useNavigate();
+  const [searchParams,setSearchParams]=useSearchParams();
+  const [names, setNames] = useState(searchParams.get("speciality")||"")
+  const [location, setLocation] = useState(searchParams.get("location")||"")
 
   const handleBox = (ele, index) => {
     setIsModalOpen(true);
@@ -39,13 +41,27 @@ export const Services = () => {
       speciality: names,
       location: location
     }
+   
     dispatch(serviceData(newData));
+    nav("/servicesData")
   }
+
+  useEffect(()=>{
+    if(names && location){
+
+      let params={
+        speciality:names,
+        location:location
+      }
+      setSearchParams(params);
+    }
+  
+  },[location])
 
   return (
 
     <DIV>
-      {/* <p className='para'>"We offer specialized expertise to address your unique needs and concerns. Our team is dedicated to providing you with personalized solutions, ensuring you receive the highest quality of care and attention."</p> */}
+
       <h1 className='h1 para'>WE CAN HELP YOU WITH</h1>
       <div className='service-image'>
         {item?.map((ele, index) => {

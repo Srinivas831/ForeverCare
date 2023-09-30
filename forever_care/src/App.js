@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 import './App.css';
 import NavBar from './HomeComponents/Navbar';
 import AllRoutes from './HomeComponents/Routes';
@@ -10,7 +10,6 @@ function App() {
     <div className="App">
       <NavBar />
       <AllRoutes />
-   {/* <Services /> */}
     </div>
     </BrowserRouter>
   );
