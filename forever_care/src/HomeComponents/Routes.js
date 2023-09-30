@@ -11,6 +11,7 @@ import {Packages} from '../Pages/Packages'; // Create Packages component
 import {Contact} from '../Pages/Contact'; // Create Contact component
 import { SignUp } from '../LoginComponent/Signup';
 import { Services } from '../serviceComponents/Services';
+import ServicesData from '../serviceComponents/ServicesData';
 
 const AllRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AllRoutes = () => {
         <Route exact path="/" component={Home} />
         {/* <Route path="/services" component={Services} /> */}
         <Route path='/services' element={<Services />}/>
+        <Route path='/servicesData' element={<ServicesData />} />
         <Route path="/about" component={About} />
         <Route path="/packages" component={Packages} />
         <Route path="/contact" component={Contact} />
