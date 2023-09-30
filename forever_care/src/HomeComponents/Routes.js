@@ -9,9 +9,10 @@ import { Home }from '../Pages/Home'; // Create Home component
 import {About} from '../Pages/About'; // Create About component
 import {Packages} from '../Pages/Packages'; // Create Packages component
 import {Contact} from '../Pages/Contact'; // Create Contact component
-import { SignUp } from '../LoginComponent/Signup';
+import { SignUp } from '../LoginComponent/SignUp';
 import { Services } from '../serviceComponents/Services';
-import ServicesData from '../serviceComponents/ServicesData';
+import { SignIn } from '../LoginComponent/SignIn';
+
 
 const AllRoutes = () => {
   return (
@@ -20,11 +21,11 @@ const AllRoutes = () => {
         <Route exact path="/" component={Home} />
         {/* <Route path="/services" component={Services} /> */}
         <Route path='/services' element={<Services />}/>
-        <Route path='/servicesData' element={<ServicesData />} />
         <Route path="/about" component={About} />
         <Route path="/packages" component={Packages} />
         <Route path="/contact" component={Contact} />
-        <Route path='/login' element={<SignUp />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/signin' element={<SignIn />} />
       </Routes>
     </div> 
   );
