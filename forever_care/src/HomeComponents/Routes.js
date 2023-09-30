@@ -9,9 +9,10 @@ import { Home }from '../Pages/Home'; // Create Home component
 import {About} from '../Pages/About'; // Create About component
 import {Packages} from '../Pages/Packages'; // Create Packages component
 import {Contact} from '../Pages/Contact'; // Create Contact component
-import { SignUp } from '../LoginComponent/SignUp';
+import { SignUp } from '../LoginComponent/Signup';
 import { Services } from '../serviceComponents/Services';
 import { SignIn } from '../LoginComponent/SignIn';
+import ServicesData from '../serviceComponents/ServicesData';
 
 
 const AllRoutes = () => {
@@ -26,6 +27,7 @@ const AllRoutes = () => {
         <Route path="/contact" component={Contact} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
+        <Route path='/servicesData' element={<ServicesData />} />
       </Routes>
     </div> 
   );
