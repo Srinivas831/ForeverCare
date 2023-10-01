@@ -1,9 +1,31 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Box, Button, Flex, HStack, Image, Link,chakra } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Image, Link,chakra,  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Tooltip, } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
+import MultiStepForm from './Pay';
+
 
 const ServiceCard = memo(({education,id,gender,image,language,location,name,speciality,experience}) => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [showAmountTooltip, setShowAmountTooltip] = useState(false);
+  
+  function handleAppointment() {
+    setIsModalOpen(true); 
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false); // Close the modal
+  }
+
+
   return (
 
 <Flex
@@ -82,7 +104,7 @@ const ServiceCard = memo(({education,id,gender,image,language,location,name,spec
         {language.map((ele)=><span key={Math.random()}> {ele}</span>)}
     </div>
     </DIV>
-      <HStack spacing={1} display="flex" alignItems="center" mt={{base:3,md:5}}>
+      <HStack spacing={1.5} display="flex" alignItems="center" mt={{base:3,md:5}}>
         <StarIcon
           color="yellow.300"
           _dark={{
@@ -110,13 +132,47 @@ const ServiceCard = memo(({education,id,gender,image,language,location,name,spec
         <StarIcon color="gray.500" />
       </HStack>
 
-      <Flex  mb={{base:4,md:1}} mr={{base:12,md:9}} mt={{base:4,md:-3}} m={{base:""}} alignItems="center" justifyContent="space-between">
-        <chakra.h1 color="white" fontWeight="bold" fontSize="md" m={5}>
-        </chakra.h1>
-        <Button>
-          BOOK APPOINTMENT
-        </Button>
-      </Flex>
+     
+    <Flex mb={{ base: 4, md: 1 }} mr={{ base: 12, md: 9 }} mt={{ base: 2, md: -3 }} alignItems="center" justifyContent="space-between">
+    <chakra.h1 color="white" fontWeight="bold"></chakra.h1>
+        <Tooltip label="Rs 500" isOpen={showAmountTooltip} hasArrow>
+          <Button
+            fontSize={{ base: "sm" }}
+            padding={{ base: 1.5 }}
+            _hover={{
+              bg: "teal.500", // Background color on hover
+              color: "white", // Text color on hover
+            }}
+            onMouseEnter={() => {
+              setShowAmountTooltip(true); // Show the tooltip when hovering
+            }}
+            onMouseLeave={() => {
+              setShowAmountTooltip(false); // Hide the tooltip when not hovering
+            }}
+            onClick={handleAppointment}
+          >
+            BOOK APPOINTMENT
+          </Button>
+        </Tooltip>
+
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader alignSelf={"center"}>Book Appointment</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <MultiStepForm />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="teal" onClick={handleCloseModal}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+    </Flex>
     </Box>
   </Flex>
 </Flex>

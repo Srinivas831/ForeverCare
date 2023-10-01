@@ -8,6 +8,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { serviceData } from '../reduxService/actionService';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import MultiStepForm from './Pay';
 
 export const Services = () => {
   const imageArray = [
@@ -42,8 +43,18 @@ export const Services = () => {
       location: location
     }
    
-    dispatch(serviceData(newData));
-    nav("/servicesData")
+    // dispatch(serviceData(newData));
+
+    const newSearchParams = new URLSearchParams();
+    newSearchParams.append("speciality", newData.speciality);
+    newSearchParams.append("location", newData.location);
+
+    // nav("/servicesData")
+    nav(`/servicesData?${newSearchParams.toString()}`);
+
+
+    
+
   }
 
   useEffect(()=>{
@@ -137,7 +148,9 @@ export const Services = () => {
           </ModalContent>
         </Modal>
       )}
+      {/* <MultiStepForm /> */}
     </DIV>
+    
   )
 }
 

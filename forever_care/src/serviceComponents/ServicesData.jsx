@@ -1,13 +1,9 @@
-
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import ServiceCard from './ServiceCard'
-import { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 
-
-/////////////////
 import theme from './theme';
 import { ThemeProvider } from '@mui/material/styles';
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -58,113 +54,109 @@ const messageExamples = [
       secondary:"I received prompt and effective treatment from Forever Care.",
       person: 'https://img.freepik.com/premium-photo/cute-casual-woman-outdoor_624325-394.jpg',
     },
-  ];
+];
+
 function refreshMessages() {
     const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
   
-    return Array.from(new Array(50)).map(
+    return Array.from(new Array(20)).map(
       () => messageExamples[getRandomInt(messageExamples.length)],
     );
-  }
-
-
-  /////////////////////////
-
-const ServicesData = () => {
-    const [searchParams,setSearchParams]=useSearchParams();
-    const dispatch=useDispatch();
-    let nav=useNavigate();
-   
-    const dataFromStore=useSelector((store)=>{
-        return{
-            data:store.isSuccessService,
-            loading:store.isLoadingService,
-            error:store.isErrorService
-        }
-    },shallowEqual)
-    
-    // useEffect(()=>{
-    //     nav("/servicesData")
-    //     const paramObj={
-    //         params:{
-    //             speciality:searchParams.get("speciality"),
-    //             location:searchParams.get('location'),
-    //         }
-    //     }
-    //     console.log(dataFromStore.data)
-    //     dispatch(serviceData(paramObj));
-       
-    // },[searchParams])
-
-
-    // if(dataFromStore.loading){
-    //     return <img src='https://i.gifer.com/ZKZg.gif' style={{margin:"auto",alignItems:"center", width:"5vw"}} />
-    // }
-
-    const [value, setValue] = React.useState(0);
-    const ref = React.useRef(null);
-    const [messages, setMessages] = React.useState(() => refreshMessages());
-  
-
-    React.useEffect(() => {
-      ref.current.ownerDocument.body.scrollTop = 0;
-      setMessages(refreshMessages());
-    }, [value, setMessages]);
-  
-    
-
-  return (
-    <DIV>
-   <div className='outerDiv'>
-   <div  className='innerDiv1'>
-   {dataFromStore.data?.map((ele)=><ServiceCard key={ele.id} {...ele} />)}
-   </div>
-   <div className='innerDiv2' >
-    <ThemeProvider theme={theme}>
-    <Box sx={{ pb: 7 }} ref={ref} position={"fixed"}>
-    <h2 style={{marginTop:"30px",fontSize:"20px",textAlign:"center"}}>Testimonials</h2>
-      <CssBaseline />
-      <List sx={{ maxHeight: '440px', overflowY: 'auto' }}>
-        {messages.map(({ primary, secondary, person }, index) => (
-          <ListItem  key={index + person}>
-            <ListItemAvatar>
-              <Avatar alt="Profile Picture" src={person} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={<span style={{ color: "black" }}>{primary}</span>}
-              secondary={<span style={{ color: "black" }}>{secondary}</span>} />
-          </ListItem>
-        ))}
-      </List>
-      <Paper sx={{ position: 'sticky', bottom: 0, left: 0, right: 0,mr:"15px" }} elevation={3}>
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
-          <BottomNavigationAction label="Recents" style={{color:"black"}} />
-          <BottomNavigationAction label="Favorites" style={{color:"black"}}  />
-          <BottomNavigationAction label="Archive" style={{color:"black"}} />
-        </BottomNavigation>
-      </Paper>
-    </Box>
-    </ThemeProvider>
-   </div>
-   </div>
-   </DIV>
-  )
 }
 
-export default ServicesData
+const ServicesData = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const dispatch = useDispatch();
+    let nav = useNavigate();
+   
+    const dataFromStore = useSelector((store) => ({
+        data: store.isSuccessService,
+        loading: store.isLoadingService,
+        error: store.isErrorService,
+    }), shallowEqual);
 
-const DIV=styled.div`
+    // if (dataFromStore.loading) {
+    //     return (
+    //         <img
+    //             src="https://i.gifer.com/ZKZg.gif"
+    //             style={{ margin: "auto", alignItems: "center", width: "5vw" }}
+    //         />
+    //     );
+    // }
+
+    useEffect(() => {
+        const speciality = searchParams.get("speciality");
+        const location = searchParams.get("location");
+
+        if (speciality && location) {
+            const paramObj = {
+                speciality: speciality,
+                location: location,
+            };
+            dispatch(serviceData(paramObj));
+        }
+    }, [searchParams, dispatch]);
+
+    const [value, setValue] = useState(0);
+    const ref = useRef(null);
+    const [messages, setMessages] = useState(() => refreshMessages());
+
+    React.useEffect(() => {
+        ref.current.ownerDocument.body.scrollTop = 0;
+        setMessages(refreshMessages());
+    }, [value, setMessages]);
+
+    return (
+        <DIV>
+            <div className='outerDiv'>
+                <div className='innerDiv1'>
+                    {dataFromStore.data?.map((ele) => <ServiceCard key={ele.id} {...ele} />)}
+                </div>
+                {dataFromStore?.data ? <div className='innerDiv2'>
+                    <ThemeProvider theme={theme}>
+                        <Box sx={{ pb: 7 }} ref={ref} position={"fixed"}>
+                            <h2 style={{ marginTop: "30px", fontSize: "20px", textAlign: "center" }}>Testimonials</h2>
+                            <CssBaseline />
+                            <List sx={{ maxHeight: '440px', overflowY: 'auto' }}>
+                                {messages.map(({ primary, secondary, person }, index) => (
+                                    <ListItem key={index + person}>
+                                        <ListItemAvatar>
+                                            <Avatar alt="Profile Picture" src={person} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={<span style={{ color: "black" }}>{primary}</span>}
+                                            secondary={<span style={{ color: "black" }}>{secondary}</span>} />
+                                    </ListItem>
+                                ))}
+                            </List>
+                            <Paper sx={{ position: 'sticky', bottom: 0, left: 0, right: 0, mr: "15px" }} elevation={3}>
+                                <BottomNavigation
+                                    showLabels
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);
+                                    }}
+                                >
+                                    <BottomNavigationAction label="Recents" style={{ color: "black" }} />
+                                    <BottomNavigationAction label="Favorites" style={{ color: "black" }} />
+                                    <BottomNavigationAction label="Archive" style={{ color: "black" }} />
+                                </BottomNavigation>
+                            </Paper>
+                        </Box>
+                    </ThemeProvider>
+                </div> : null}
+            </div>
+        </DIV>
+    );
+}
+
+export default ServicesData;
+
+const DIV = styled.div`
     .outerDiv{
-         display : flex;
+        display : flex;
         justify-content: space-around;
         padding-bottom: 30px; 
-
     }
     .innerDiv1{
         width: 65%;
@@ -191,4 +183,4 @@ const DIV=styled.div`
             margin-right:60vw ;
         }
     }
-`
+`;
