@@ -40,9 +40,6 @@ function Home(){
         <Box bg={"#053d4c"} padding={10}>
             <HomeDoctor />
         </Box>
-        <Box>
-            <Footer />
-        </Box>
     
     </Box>
     )

@@ -21,7 +21,7 @@ export const SignUp = () => {
       };
     
       const style = {
-        paddingTop : "70px"
+        paddingTop : "40px"
       };
 
     return (
