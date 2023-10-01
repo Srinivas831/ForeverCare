@@ -26,6 +26,27 @@ function Home(){
                 <Box>
                     <Flex>
                         <Sliding />
+                        <Box position="absolute" zIndex={5}  left={0} right={0} p={4}>
+                            <Stack maxW={'2xl'} align={'flex-start'} spacing={6} alignSelf={'flex-start'} textAlign={"left"} mt={200}>
+                                <Text
+                                    color={'white'}       
+                                    fontWeight={"semibold"}
+                                    lineHeight={1.2}
+                                    fontSize={useBreakpointValue({ base: '1xl', md: '1xl' })}>
+                                    WE GIVE YOU THE BEST
+                                </Text>
+                                <Text color={'#13d6a8'}
+                                    fontWeight={700}
+                                    lineHeight={1.2}
+                                    fontSize={useBreakpointValue({ base: '3xl', md: '5xl' })}>
+                                    Care Better Together
+                                </Text>
+                                <Text color={"#424242"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet justo eget risus feugiat eleifend nec vitae justo. Nam sagittis nibh eget augue eleifend semper. Praesent et elit vel metus convallis</Text>
+                                <Stack direction={{"base":"column","sm":"column","md":"row"}}>
+                                    <Button borderRadius={0} color={"white"}  bg="rgba(1, 213, 162, 1)" variant='solid' opacity={1} size={'lg'} fontSize={'xs'}>HOW CAN WE HELP</Button>
+                                </Stack>
+                            </Stack>
+                        </Box>
                     </Flex>
                 </Box>
             </Box>

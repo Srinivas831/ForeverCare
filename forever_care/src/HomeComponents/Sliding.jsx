@@ -22,17 +22,13 @@ export default function Sliding() {
 
   //  images used in the slide
   const cards = [
-    'https://www.lek.com/sites/default/files/hero-images/insights/latam-digital-healthcare_hero.jpg',
-    'https://cdn.expresshealthcare.in/wp-content/uploads/2020/01/22122412/Doctors-consultation.jpg',
-    'https://www.baby-chick.com/wp-content/uploads/2021/06/She-makes-sure-that-I-have-the-healthiest-pregnancy-possible-1171061920_2122x1416-1024x683.jpeg',
-    'https://blog.dentalchat.com/server/images/cms/Free-Dentist-Consult-Online.jpg',
-    'https://www.urmc.rochester.edu/MediaLibraries/URMCMedia/mental-health-wellness/adult/images/outpatient_consult_130531736.jpg'
+    'https://wallpapers.com/images/featured/doctor-kwucobzhm0etbcwy.jpg'
   ];
 
   return (
     <Box
       position={'relative'}
-      height={'800px'}
+      height={'600px'}
       width={'full'}
       overflow={'hidden'}>
       <link

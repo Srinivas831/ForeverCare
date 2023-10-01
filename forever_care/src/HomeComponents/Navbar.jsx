@@ -118,16 +118,14 @@ export default function NavBar(){
               {Paths.map((ele) => (
                 <Link key={ele.label} to={ele.path} >
                   <ChakraLink px={2}
-                py={1}
-                rounded={'md'}
-                _hover={{
-                  textDecoration: 'none',
-                  // bg: "#AED943",
-                  bg: "rgb(182,212,163)",
-                  color:"rgb(53,105,56)"
-                  
-                }}>
-                  {ele.label}
+                  py={1}
+                  rounded={'md'}
+                  _hover={{
+                    textDecoration: 'none',
+                    // bg: "#AED943",
+                    color:"#329938"
+                  }}>
+                    {ele.label}
                   </ChakraLink>
                 </Link>
               ))}
@@ -156,7 +154,7 @@ export default function NavBar(){
                  
                  _hover={{
                    textDecoration: "none",
-                   bg: "#AED943",
+                   color: "#329938"
                  }}
                >
                  {userData.name}
@@ -165,7 +163,7 @@ export default function NavBar(){
                  
                     _hover={{
                       textDecoration: "none",
-                      bg: "#AED943",
+                      color: "#329938"
                     }}
                   >
                     User Details
@@ -174,7 +172,7 @@ export default function NavBar(){
                   <MenuItem
                     _hover={{
                       textDecoration: "none",
-                      bg: "#AED943",
+                      color: "#329938"
                     }}
                   >
                   My Appointments
@@ -185,7 +183,7 @@ export default function NavBar(){
                    onClick={linkAction}
                     _hover={{
                       textDecoration: "none",
-                      bg: "#AED943",
+                      color: "#329938"
                     }}
                   >
                   Logout
@@ -199,9 +197,9 @@ export default function NavBar(){
                 py={1}
                 _hover={{
                   textDecoration: 'none',
-                  bg: "#AED943",
+                  color: "#329938"
                 }} color={isAuth ? "white":"black"}>
-                Login
+                SIGN-IN
                 </ChakraLink>
               </Link>
             )}
