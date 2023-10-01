@@ -54,15 +54,10 @@ export const SignIn = () => {
             />
             <Checkbox defaultChecked>Remember me</Checkbox>
 
-
             <button>Sign In</button>
-            
               <Link color='teal.500' href="/signup">
                 Don't have an account? SignUp
               </Link>
-
-            
-
           </Stack>
 
         </form>
@@ -75,9 +70,6 @@ const DIV = styled.div`
    margin-top: 10%;
    text-align: center;
    width: 100%;
-   
-   
-   
    
     Input{
         height: 45px;

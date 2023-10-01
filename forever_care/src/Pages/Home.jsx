@@ -3,7 +3,7 @@ import HomeTop from '../HomeComponents/HomeTop';
 import HomeServices from '../HomeComponents/HomeService';
 import HomeDoctor from '../HomeComponents/HomeDoctor';
 import Sliding from '../HomeComponents/Sliding';
-import Footer from '../HomeComponents/Footer';
+import { HomeFAQ } from '../HomeComponents/HomeFAQ';
 
 function Home(){   
 
@@ -39,6 +39,9 @@ function Home(){
         </Box>
         <Box bg={"#053d4c"} padding={10}>
             <HomeDoctor />
+        </Box>
+        <Box>
+            <HomeFAQ />
         </Box>
     
     </Box>
