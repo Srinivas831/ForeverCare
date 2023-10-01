@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Heading, Input, Stack, Link, Checkbox } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import { SignUp } from "./Signup";
+import { SignUp } from "./SignUp";
 import {  useNavigate } from "react-router-dom/dist";
 
 
@@ -24,7 +24,8 @@ export const SignIn = () => {
       // Redirect to
       nav("/")
 
-    } else {
+    } 
+    else {
       alert('Invalid email or password. Please try again.');
     }
   };
@@ -55,15 +56,12 @@ export const SignIn = () => {
 
 
             <button>Sign In</button>
-            <div className="link">
-              <Link color='teal.500' href='#'>
-                forgot Password?
-              </Link>
-              <Link color='teal.500' onClick={<SignUp/>}>
+            
+              <Link color='teal.500' href="/signup">
                 Don't have an account? SignUp
               </Link>
 
-            </div>
+            
 
           </Stack>
 
@@ -74,9 +72,10 @@ export const SignIn = () => {
 }
 
 const DIV = styled.div`
-   margin-top: 8%;
+   margin-top: 10%;
    text-align: center;
-width: 100%;
+   width: 100%;
+   
    
    
    
@@ -108,11 +107,8 @@ width: 100%;
       border: 1px solid green;
       padding: 2%;
       @media (max-width: 768px) {
-      width: 90%; /* Adjust for smaller screens */
-    } 
-    @media (max-width: 1500px) {
-      width: 35%; /* Adjust for smaller screens */
-    } 
+      width: 90%; 
+    }
     
     }
     button:hover{
