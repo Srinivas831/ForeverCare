@@ -1,4 +1,4 @@
-import { Flex,Box } from '@chakra-ui/react'
+import { Flex,Box, Stack, Text, Button, useBreakpointValue } from '@chakra-ui/react'
 import HomeTop from '../HomeComponents/HomeTop';
 import HomeServices from '../HomeComponents/HomeService';
 import HomeDoctor from '../HomeComponents/HomeDoctor';
@@ -58,7 +58,7 @@ function Home(){
         <Box>
             <HomeServices />
         </Box>
-        <Box bg={"#053d4c"} padding={10}>
+        <Box padding={10}>
             <HomeDoctor />
         </Box>
         <Box>
