@@ -14,19 +14,15 @@ export const SignIn = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    
-    const storedEmail = localStorage.getItem('email');
-    const storedPassword = localStorage.getItem('password');
-    
-    
-    if (email === storedEmail && password === storedPassword) {
-      alert('Sign in successful!');
-      // Redirect to
-      nav("/")
+    const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    } 
-    else {
-      alert('Invalid email or password. Please try again.');
+    const foundUser = users.find((user) => user.email === email && user.password === password);
+
+    if (foundUser) {
+      alert("Sign in successful!");
+      nav("/");
+    } else {
+      alert("Invalid email or password. Please try again.");
     }
   };
 
@@ -75,7 +71,7 @@ const DIV = styled.div`
    margin-top: 10%;
    text-align: center;
    width: 100%;
-   
+   font-family: 'Poppins', sans-serif;
    
    
    

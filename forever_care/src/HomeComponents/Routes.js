@@ -6,7 +6,7 @@ import { Routes } from 'react-router-dom';
 import {About} from '../Pages/About';
 import {Packages} from '../Pages/Packages';
 import {Contact} from '../Pages/Contact';
-import { SignUp } from '../LoginComponent/Signup';
+import { SignUp } from '../LoginComponent/SignUp';
 import { Services } from '../serviceComponents/Services';
 import { SignIn } from '../LoginComponent/SignIn';
 import ServicesData from '../serviceComponents/ServicesData';
