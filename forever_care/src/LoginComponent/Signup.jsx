@@ -19,13 +19,14 @@ export const SignUp = () => {
     
         // Redirect or perform any other action after sign-up
       };
+    
+      const style = {
+        paddingTop : "70px"
+      };
 
     return (
-        <DIV className="signup">
-            
-
+        <DIV className="signup" style={style}>
                 <form onSubmit={handleSignUp}>
-
                     <Stack spacing={5}>
                         <Heading>Sign Up</Heading>
                         <div className="name">
@@ -33,7 +34,6 @@ export const SignUp = () => {
                                 placeholder='Enter First Name'
                                 _placeholder={{ opacity: 1, color: 'teal' }}
                             />
-
                             <Input
                                  placeholder='Enter Last Name'
                                 _placeholder={{ opacity: 1, color: 'teal' }}
@@ -73,7 +73,6 @@ export const SignUp = () => {
 }
 
 const DIV = styled.div`
-   margin-top: 8%;
    text-align: center;
    
    
