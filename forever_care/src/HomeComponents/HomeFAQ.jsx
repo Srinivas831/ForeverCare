@@ -1,3 +1,5 @@
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box,Text } from "@chakra-ui/react";
+
 export const HomeFAQ = () =>{
 
     const faqs = [

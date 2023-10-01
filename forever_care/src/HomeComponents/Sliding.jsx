@@ -55,6 +55,7 @@ export default function Sliding() {
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
             backgroundImage={`url(${url})`}
+            
           />
 
         ))}

@@ -46,10 +46,9 @@ const Card = ({ heading, description, icon }) => {
 
 export default function HomeServices() {
   return (
-    <Box p={4} padding={20}>
+    <Box p={"0px 20px 0 30px"}>
       <Container
         maxW={"10xl"}
-        mt={12}
         textAlign="left"
         display="flex"
         flexWrap="wrap"
@@ -60,11 +59,11 @@ export default function HomeServices() {
           <Heading size="xl" color={"#85AD23"} fontWeight={"semibold"}>
             WHAT OUR DOCTORS DO
           </Heading>
-          <Heading size="2xl" color={"black"} fontWeight={"semibold"}>
+          <Heading size="2xl" color={"black"} fontWeight={"semibold"} paddingTop={3} >
             Our Healthcare Services
           </Heading>
           <Flex>
-            <Text color={"#8b8986"}>
+            <Text color={"#8b8986"} paddingTop={5} >
             Our Healthcare Services encompass a comprehensive range of medical specialties and treatments. From neurology to dental care, our dedicated team of experts is committed to providing top-tier healthcare solutions tailored to your needs. With cutting-edge technology and a patient-centered approach, we ensure your well-being is our priority.
             </Text>
           </Flex>
