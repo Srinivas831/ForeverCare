@@ -71,7 +71,7 @@ const DIV = styled.div`
    margin-top: 10%;
    text-align: center;
    width: 100%;
-   font-family: 'Poppins', sans-serif;
+   
    
    
    
