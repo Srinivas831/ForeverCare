@@ -103,7 +103,7 @@ const DIV = styled.div`
       border: 1px solid green;
       padding: 2%;
       @media (max-width: 768px) {
-      width: 90%; /* Adjust for smaller screens */
+      width: 90%; 
     }
     }
     button:hover{

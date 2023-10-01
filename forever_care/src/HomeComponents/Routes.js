@@ -1,4 +1,3 @@
-// routes.js
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
@@ -20,7 +19,7 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element= { <Home/> } />
         <Route path='/services' element={<Services />}/>
-        <Route path="/about" component={About} />
+        <Route path="/about" element={<About/>} />
         <Route path="/packages" component={Packages} />
         <Route path="/contact" component={Contact} />
         <Route path='/signup' element={<SignUp />} />
