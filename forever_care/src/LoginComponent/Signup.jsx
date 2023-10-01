@@ -1,25 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Heading, Input, Stack, Link} from "@chakra-ui/react";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 
 
 export const SignUp = () => {
+    const nav = useNavigate();
+  const [isEmailRegistered, setIsEmailRegistered] = useState(false);
 
-    const handleSignUp = (event) => {
-        event.preventDefault();
-    
-        const formData = new FormData(event.target);
-    const email = formData.get('email');
-    const password = formData.get('password');
-    console.log(email, password)
-        
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
-    
-        // Redirect or perform any other action after sign-up
-      };
-    
+  const handleSignUp = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    if (!email || !password) {
+        alert("Please enter valid credentials.");
+        return;
+      }
+
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    const isExistingEmail = existingUsers.some(user => user.email === email);
+
+    if (isExistingEmail) {
+      setIsEmailRegistered(true);
+    } else {
+      setIsEmailRegistered(false);
+
+      const newUser = { email, password };
+      const updatedUsers = [...existingUsers, newUser];
+
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+      alert("Account created successfully!");
+
+      nav("/signin");
+    }
+  };
+
+
       const style = {
         paddingTop : "40px"
       };
@@ -67,14 +88,16 @@ export const SignUp = () => {
                     </Stack>
 
                 </form>
-            
+                {isEmailRegistered && (
+        <div style={{ color: "red", marginTop: "10px" }}>Email is already registered. Please use a different email.</div>
+      )}
         </DIV>
     )
 }
 
 const DIV = styled.div`
    text-align: center;
-   
+   font-family: 'Poppins', sans-serif;
    
     Input{
         height: 45px;

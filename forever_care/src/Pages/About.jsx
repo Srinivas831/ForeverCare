@@ -63,9 +63,8 @@ const DIV= styled.div`
 
      margin-top: 80px;
      align-items: center;
-     font-family: 'Pacifico', cursive;
-
-    
+     font-family: 'Poppins', sans-serif;
+ 
     h1{
         font-size: 30px;
         font-weight: bold;
@@ -87,8 +86,9 @@ const DIV= styled.div`
         padding: 2%;
         gap: 3%;
         flex-direction: row;
-        @media (min-width: 768px) {
-    flex-direction: row;
+        @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
   }
        
     }
