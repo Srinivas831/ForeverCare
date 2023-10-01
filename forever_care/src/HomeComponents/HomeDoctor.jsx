@@ -9,7 +9,7 @@ const Card = ({image}) => {
      w={"full"}
      overflow="hidden"
     position="relative"
-    boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
+    // boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
     >
         <Box
             position="absolute"
@@ -17,7 +17,7 @@ const Card = ({image}) => {
             left={0}
             right={0}
             bottom={0}
-            bgGradient="linear(to top, rgba(133, 173, 35, 1) 0%, rgba(133, 173, 35, 1) 50%)"
+            // bgGradient="linear(to top, rgba(133, 173, 35, 1) 0%, rgba(133, 173, 35, 1) 50%)"
         />
         <Stack spacing={3} height={"100%"}> 
             <Image src={image} alt="patient" height={"100%"} objectFit={"cover"} width="100%"></Image>
@@ -37,23 +37,23 @@ export default function HomeDoctor() {
         md: "repeat(1, 1fr)"
       }}
       gap={4}
+      // bg={"#27330A"}
     >
 
-      <GridItem colSpan={1} bg={"#27330A"}>
+      <GridItem colSpan={1} >
         <VStack spacing="5px" textAlign={"center"}>
           <Flex>
           <chakra.h2 color={'#85AD23'} fontWeight={"semibold"} fontSize='1xl'>
-         
           ABOUT OUR MEDICAL TEAM
           </chakra.h2>
           </Flex>
           <Flex>
-          <chakra.h2  color={"white"} fontSize='2xl' fontWeight={"semibold"}>
+          <chakra.h2  color={"black"} fontSize='2xl' fontWeight={"semibold"}>
           Meet Our Dedicated Team of Doctors
           </chakra.h2>
           </Flex>
           <Flex>
-            <chakra.p color={"white"}>
+            <chakra.p color={"black"}>
             Our team of experienced and compassionate doctors is committed to your health and well-being. With expertise in a wide range of medical specialties, they provide personalized care and the latest treatments to ensure you receive the highest quality healthcare. Whether you're seeking routine check-ups or specialized medical attention, our doctors are here to guide you on your path to wellness.
             </chakra.p>
             </Flex>

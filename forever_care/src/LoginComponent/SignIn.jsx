@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Heading, Input, Stack, Link, Checkbox } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import { SignUp } from "./SignUp";
+import { SignUp } from "./Signup";
 import {  useNavigate } from "react-router-dom/dist";
 
 
