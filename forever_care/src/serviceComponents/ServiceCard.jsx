@@ -1,5 +1,5 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Box, Button, Flex, HStack, Image, Link,chakra,  Modal,
+import { Box, Button, Flex, HStack,chakra,  Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
@@ -12,7 +12,7 @@ import React, { memo, useState } from 'react'
 import MultiStepForm from './Pay';
 
 
-const ServiceCard = memo(({education,id,gender,image,language,location,name,speciality,experience}) => {
+const ServiceCard = memo(({education,image,language,location,name,speciality,experience}) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [showAmountTooltip, setShowAmountTooltip] = useState(false);

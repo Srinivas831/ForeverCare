@@ -15,7 +15,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import styled from '@emotion/styled';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { serviceData } from '../reduxService/actionService';
 
 const messageExamples = [
@@ -67,7 +67,6 @@ function refreshMessages() {
 const ServicesData = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
-    let nav = useNavigate();
    
     const dataFromStore = useSelector((store) => ({
         data: store.isSuccessService,
@@ -114,7 +113,7 @@ const ServicesData = () => {
                 </div>
                 {dataFromStore?.data ? <div className='innerDiv2'>
                     <ThemeProvider theme={theme}>
-                        <Box sx={{ pb: 7 }} ref={ref} position={"fixed"}>
+                        <Box  sx={{ pb: 7 }} ref={ref} position={"fixed"} mr={"20px"} borderRadius={"10px"} bgcolor={"thistle"} >
                             <h2 style={{ marginTop: "30px", fontSize: "20px", textAlign: "center" }}>Testimonials</h2>
                             <CssBaseline />
                             <List sx={{ maxHeight: '440px', overflowY: 'auto' }}>
@@ -157,15 +156,15 @@ const DIV = styled.div`
         display : flex;
         justify-content: space-around;
         padding-bottom: 30px; 
-        opacity: 100;
     }
     .innerDiv1{
         width: 65%;
     }
     .innerDiv2{
         width: 33%;
-        background-color:rgb(237,243,248);
+        /* background-color:rgb(237,243,248); */
         color: black;
+        padding: 20px 20px 20px 5px;
     }
 
     @media screen and (min-width:200px) and  (max-width:600px) {

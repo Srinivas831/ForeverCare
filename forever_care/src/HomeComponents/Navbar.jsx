@@ -4,8 +4,6 @@ import {
   Flex,
   HStack,
   IconButton,
-  Image,
-  Text
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import {
@@ -20,8 +18,6 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import logoImage from '../logo.svg'
-
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
