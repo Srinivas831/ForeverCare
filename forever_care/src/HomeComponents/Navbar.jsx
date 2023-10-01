@@ -3,10 +3,10 @@ import {
   Button,
   Flex,
   HStack,
-  Icon,
   IconButton,
+  Image,
+  Text
 } from "@chakra-ui/react";
-
 import { useContext } from "react";
 import {
   Avatar,
@@ -20,15 +20,17 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-
+import logoImage from '../logo.svg'
 
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
  
 export default function NavBar(){
   const { isAuth, setAuth, setUserData,userData } = useContext(AuthContext);
+  const [currentPage, setCurrentPage] = useState(window.location.pathname);
 
   const navigate = useNavigate();
 
@@ -52,24 +54,23 @@ export default function NavBar(){
 
   return (
 
-   <>
-    <Box position="relative">
+   <div>
+    <Box position="relative" zIndex={10}>
       <Box
         position="absolute"
         top={0}
         left={0}
         right={0}
-        zIndex={20}
         bg="transparent"
-        px={4}
-        py={2}
       >
-      <Box  bg={"transparent"} px={4} color={"white"} fontWeight={"bold"}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+      <Box bg={"rgba(133, 173, 35, 0.5)"} px={4} color={"white"} fontWeight={"bold"} >
+        <Flex h={16} alignItems={"center"} justifyContent={"space-between" }>
           <IconButton
+            as = {HamburgerIcon}
+            bg = "#6A8A1C"
             _hover={{
               textDecoration: "none",
-              bg: "#01D5A2",
+              bg: "#AED943",
             }}
             size={"md"}
             icon={isOpen ? "" :""}
@@ -77,6 +78,28 @@ export default function NavBar(){
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
+
+          <Box>
+          <Link to="/">
+                {/* <Text */}
+                  {/* fontSize="20px" */}
+                  {/* fontWeight="bold" */}
+                  {/* fontFamily="cursive"  */}
+                  {/* color="#27330A" */}
+                  {/* textTransform="uppercase" */}
+                  {/* letterSpacing="0.1rem" */}
+                  {/* _hover={{ */}
+                    {/* textDecoration: "none", */}
+                    {/* color: "#E6EED3", */}
+                    {/* transition: "color 0.5s ease", */}
+                  {/* }} */}
+                {/* > */}
+                  {/* Forever Care */}
+                {/* </Text> */}
+                <img src= "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/y980dab2kn2on4ozyx80.jpg" alt="Logo"></img>
+              </Link>
+          </Box>
+          
           <HStack spacing={8} alignItems={"center"} color={isAuth ? "white":"black"}>
             
             <HStack
@@ -92,7 +115,7 @@ export default function NavBar(){
                 rounded={'md'}
                 _hover={{
                   textDecoration: 'none',
-                  bg: "#01D5A2",
+                  bg: "#AED943",
                 }}>
                   {ele.label}
                   </ChakraLink>
@@ -123,7 +146,7 @@ export default function NavBar(){
                  
                  _hover={{
                    textDecoration: "none",
-                   bg: "#01D5A2",
+                   bg: "#AED943",
                  }}
                >
                  {userData.name}
@@ -132,7 +155,7 @@ export default function NavBar(){
                  
                     _hover={{
                       textDecoration: "none",
-                      bg: "#01D5A2",
+                      bg: "#AED943",
                     }}
                   >
                     User Details
@@ -141,10 +164,10 @@ export default function NavBar(){
                   <MenuItem
                     _hover={{
                       textDecoration: "none",
-                      bg: "#01D5A2",
+                      bg: "#AED943",
                     }}
                   >
-                    My Appointments
+                  My Appointments
                   </MenuItem>
                   </Link>
                   <MenuDivider />
@@ -152,12 +175,11 @@ export default function NavBar(){
                    onClick={linkAction}
                     _hover={{
                       textDecoration: "none",
-                      bg: "#01D5A2",
+                      bg: "#AED943",
                     }}
                   >
-                    Logout
+                  Logout
                   </MenuItem>
-                  
                 </MenuList>
               </Menu>
             ) : (
@@ -167,7 +189,7 @@ export default function NavBar(){
                 py={1}
                 _hover={{
                   textDecoration: 'none',
-                  bg: "#01D5A2",
+                  bg: "#AED943",
                 }} color={isAuth ? "white":"black"}>
                 Login
                 </ChakraLink>
@@ -180,14 +202,12 @@ export default function NavBar(){
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}  bg={"white"} borderRadius={5} padding={2} textAlign={"left"} color="black">
               {Paths.map((ele) => (
-
                 <Link key={ele.label} to={ele.path}>
                   <ChakraLink px={2} py={1} rounded={'md'}
                       _hover={{
                       textDecoration: 'none',
-                    bg: "#01D5A2",
+                    bg: "#AED943",
                   }}>
-                  <Icon as={HamburgerIcon} />
                   {ele.label} </ChakraLink>
                 </Link>
               ))}
@@ -197,35 +217,6 @@ export default function NavBar(){
       </Box>
       </Box>
       </Box>
-    </>
+    </div>
   );
 }
-
-
-
-
-// Navbar.jsx
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// // import './Navbar.css';
-
-// const Navbar = () => {
-//   return (
-//     <nav className="navbar">
-//       <Link to="/" className="logo">Your Logo</Link>
-//       <div className="menu">
-//         <Link to="/">Home</Link>
-//         <Link to="/services">Services</Link>
-//         <Link to="/about">About</Link>
-//         <Link to="/packages">Packages</Link>
-//         <Link to="/contact">Contact</Link>
-//       </div>
-//       <div className="buttons">
-//         <button className="login">Login</button>
-//         <button className="signup">Signup</button>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
