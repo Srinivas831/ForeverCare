@@ -5,10 +5,8 @@ import {
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
-import { serviceData } from '../reduxService/actionService';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import MultiStepForm from './Pay';
+
 
 export const Services = () => {
   const imageArray = [
@@ -20,7 +18,6 @@ export const Services = () => {
     { name: "PREGNANCY", image: "https://www.newfolks.com/wp-content/uploads/sites/6/2021/12/pregnant-mom-belly-doctor-appointment.jpg?fit=1024%2C1024&p=1" }
   ]
 
-  const dispatch = useDispatch();
   const [item] = useState(imageArray);
   const [isModalOpen, setIsModalOpen] = useState(false);
   let nav=useNavigate();
@@ -42,8 +39,6 @@ export const Services = () => {
       speciality: names,
       location: location
     }
-   
-    // dispatch(serviceData(newData));
 
     const newSearchParams = new URLSearchParams();
     newSearchParams.append("speciality", newData.speciality);
@@ -51,11 +46,8 @@ export const Services = () => {
 
     // nav("/servicesData")
     nav(`/servicesData?${newSearchParams.toString()}`);
-
-
-    
-
   }
+
 
   useEffect(()=>{
     if(names && location){
