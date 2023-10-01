@@ -21,8 +21,8 @@ export const About = ()=>{
 <hr />
         <div className="mission">
             <h1>Our Misson & Visson</h1>
-            <p>"To provide accessible, compassionate, and high-quality healthcare, meeting diverse needs and promoting well-being through innovation and excellence." <br />
-            "To be a beacon of healthcare excellence, advancing innovations, and fostering a culture of wellness for a healthier community. These condensed statements capture the essence of the hospital's mission and vision, conveying the commitment to quality care, innovation, and community well-being in a succinct manner. Feel free to tailor them to suit your hospital's unique values and goals.</p>
+            <p>"Our mission at Forever Care is to provide accessible, compassionate, and high-quality healthcare to enhance the well-being of our community. We strive to deliver personalized, patient-centric care that meets the diverse needs of individuals and families, ensuring their comfort, trust, and confidence in our services. With a commitment to integrity, innovation, and excellence, we aim to improve and save lives through cutting-edge medical practices, continuous education, and community engagement." <br />
+            "Our vision at Forever Care is to be a leading healthcare institution recognized for delivering exceptional medical services, pioneering advancements in healthcare, and positively impacting the communities we serve. We envision a future where healthcare is accessible, equitable, and patient-focused, promoting a culture of wellness and a higher quality of life. Through continuous growth, a dedicated team, and a patient-centric approach, we aspire to set new standards in healthcare excellence and become a beacon of hope and healing for all."</p>
             <img src="https://themes.muffingroup.com/be/clinic2/wp-content/uploads/2017/08/home_clinic2_treatment2.jpg" alt="" />
             </div>
 <hr />
