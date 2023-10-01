@@ -7,6 +7,10 @@ import { HomeFAQ } from '../HomeComponents/HomeFAQ';
 
 function Home(){   
 
+    const redirectTo = () => {
+        window.location.href = '/services'; 
+    }
+
     return(  
         <Box
             maxWidth="100%" mx="auto"
@@ -43,7 +47,7 @@ function Home(){
                                 </Text>
                                 <Text color={"#424242"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet justo eget risus feugiat eleifend nec vitae justo. Nam sagittis nibh eget augue eleifend semper. Praesent et elit vel metus convallis</Text>
                                 <Stack direction={{"base":"column","sm":"column","md":"row"}}>
-                                    <Button borderRadius={0} color={"white"}  bg="rgba(1, 213, 162, 1)" variant='solid' opacity={1} size={'lg'} fontSize={'xs'}>HOW CAN WE HELP</Button>
+                                    <Button onClick={redirectTo} borderRadius={0} color={"white"}  bg="rgba(1, 213, 162, 1)" variant='solid' opacity={1} size={'lg'} fontSize={'xs'} >SEE OUR SERVICES</Button>
                                 </Stack>
                             </Stack>
                         </Box>
