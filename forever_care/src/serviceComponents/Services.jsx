@@ -155,6 +155,7 @@ export const Services = () => {
 }
 
 const DIV = styled.div`
+
     .service-image{
         display: grid;
         grid-template-columns:repeat(2,1fr);
@@ -162,6 +163,7 @@ const DIV = styled.div`
     .h1{
       font-size: 20px;
       font-weight: bold;
+      padding-top: 20px;
     }
     .para{
       text-align: center;

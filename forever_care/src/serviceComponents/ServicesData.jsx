@@ -157,6 +157,7 @@ const DIV = styled.div`
         display : flex;
         justify-content: space-around;
         padding-bottom: 30px; 
+        opacity: 100;
     }
     .innerDiv1{
         width: 65%;

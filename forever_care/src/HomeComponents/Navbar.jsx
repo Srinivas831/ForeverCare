@@ -55,22 +55,27 @@ export default function NavBar(){
   return (
 
    <div>
-    <Box position="relative" zIndex={10}>
+    <Box position="relative" zIndex={10} mb={"60px"}>
       <Box
-        position="absolute"
+        position="fixed"
+        width={"-webkit-full-available"}
         top={0}
         left={0}
         right={0}
         bg="transparent"
       >
-      <Box bg={"rgba(133, 173, 35, 0.5)"} px={4} color={"white"} fontWeight={"bold"} >
+      <Box
+      //  bg={"rgba(133, 173, 35, 0.5)"} 
+      // bg={"rgb(1,213,162)"}
+      bg={"rgb(237,243,248)"}
+      px={4} color={"white"} fontWeight={"bold"} >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between" }>
           <IconButton
             as = {HamburgerIcon}
-            bg = "#6A8A1C"
+            // bg = "#6A8A1C"
             _hover={{
               textDecoration: "none",
-              bg: "#AED943",
+              // bg: "#AED943",
             }}
             size={"md"}
             icon={isOpen ? "" :""}
@@ -96,7 +101,9 @@ export default function NavBar(){
                 {/* > */}
                   {/* Forever Care */}
                 {/* </Text> */}
-                <img src= "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/y980dab2kn2on4ozyx80.jpg" alt="Logo"></img>
+                <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x9j5guxzzgksruid010e.png" alt="Logo" width={"240px"} height={"200px"} />
+                {/* https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9xz2guks0iij3w6ez7uw.png */}
+                {/* "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/06rfxiejshilc7yovjww.png" */}
               </Link>
           </Box>
           
@@ -115,7 +122,10 @@ export default function NavBar(){
                 rounded={'md'}
                 _hover={{
                   textDecoration: 'none',
-                  bg: "#AED943",
+                  // bg: "#AED943",
+                  bg: "rgb(182,212,163)",
+                  color:"rgb(53,105,56)"
+                  
                 }}>
                   {ele.label}
                   </ChakraLink>
