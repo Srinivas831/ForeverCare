@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Box, Heading, Input, Stack, Link, Checkbox } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom/dist";
+import {  useNavigate } from "react-router-dom/dist";
 import { useDispatch, useSelector } from "react-redux";
 import { authCheck } from "../reduxAuth/action";
 
