@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
-  Button,
-  ChakraProvider,
-  CSSReset,
-  Text,
-  Progress,
-  useToast,
-  Stack,
-  HStack,
-  VStack,
+  Box,FormControl,FormLabel,Input,Textarea,Button,ChakraProvider,CSSReset,Text,Progress,useToast,Stack,HStack,VStack,
 } from '@chakra-ui/react';
+import axios from 'axios';
 
 function MultiStepForm() {
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
   const [step, setStep] = useState(1);
   const [patientDetails, setPatientDetails] = useState({
     name: '',
@@ -79,16 +69,67 @@ function MultiStepForm() {
 
   const handleConfirm = () => {
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    const newPatientDetail = {
+      name: patientDetails.name,
+      email: patientDetails.email,
+      address: patientDetails.address,
+      issue: patientDetails.issue,
+      }
+
+      axios.get('https://forevercare.onrender.com/users')
+      .then((response) => { console.log(response.data)
+        const existingData = response.data;
+        const userIndex = existingData.find(user => user.email === users.email);
+        console.log("new",userIndex)
+        const userId=userIndex.id;
+
+        if (userIndex.id !== undefined) {
+          axios.patch(`https://forevercare.onrender.com/users/${userId}`, {
+            userIndex:newPatientDetail,
+          })
+            .then((response) => {
+              setIsSubmitting(false);
+              toast({
+                title: 'Appointment booked!',
+                description: 'Your appointment has been successfully booked.',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+              });
+            })
+            .catch((error) => {
+              setIsSubmitting(false);
+              console.error('Error:', error);
+              toast({
+                title: 'Error',
+                description: 'An error occurred while booking the appointment.',
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+              });
+            });
+        } else {
+          setIsSubmitting(false);
+          toast({
+            title: 'User email not found in the API',
+            status: 'warning',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+    })
+    .catch((error) => {
       setIsSubmitting(false);
+      console.error('Error:', error);
       toast({
-        title: 'Appointment booked!',
-        description: 'Your appointment has been successfully booked.',
-        status: 'success',
+        title: 'Error',
+        description: 'An error occurred while searching for the user in the API.',
+        status: 'error',
         duration: 5000,
         isClosable: true,
       });
-    }, 2000);
+    });
   };
 
   const validatePatientDetails = () => {
@@ -270,101 +311,3 @@ export default MultiStepForm;
 
 
 
-// {step === 1 && (
-//   <Box>
-//     <FormControl>
-//       <FormLabel>Patient Name</FormLabel>
-//       <Input
-//         type="text"
-//         name="name"
-//         value={patientDetails.name}
-//         onChange={(e) => handleChange(e, 'patient')}
-//       />
-//     </FormControl>
-//     <FormControl>
-//       <FormLabel>Email (optional)</FormLabel>
-//       <Input
-//         type="email"
-//         name="email"
-//         value={patientDetails.email}
-//         onChange={(e) => handleChange(e, 'patient')}
-//       />
-//     </FormControl>
-//     <FormControl>
-//       <FormLabel>Address</FormLabel>
-//       <Input
-//         type="text"
-//         name="address"
-//         value={patientDetails.address}
-//         onChange={(e) => handleChange(e, 'patient')}
-//       />
-//     </FormControl>
-//     <FormControl>
-//       <FormLabel>Issue</FormLabel>
-//       <Textarea
-//         name="issue"
-//         value={patientDetails.issue}
-//         onChange={(e) => handleChange(e, 'patient')}
-//       />
-//     </FormControl>
-//     <Button onClick={handleNext}>Next</Button>
-//   </Box>
-// )}
-// {step === 2 && (
-//   <Box>
-//     <FormControl>
-//       <FormLabel>Card Holder Name</FormLabel>
-//       <Input
-//         type="text"
-//         name="cardHolderName"
-//         value={paymentDetails.cardHolderName}
-//         onChange={(e) => handleChange(e, 'payment')}
-//       />
-//     </FormControl>
-//     <FormControl>
-//       <FormLabel>Card Number</FormLabel>
-//       <Input
-//         type="text"
-//         name="cardNumber"
-//         value={paymentDetails.cardNumber}
-//         onChange={(e) => handleChange(e, 'payment')}
-//       />
-//     </FormControl>
-//     <FormControl>
-//       <FormLabel>Expiry Date</FormLabel>
-//       <Input
-//         type="text"
-//         name="expiryDate"
-//         value={paymentDetails.expiryDate}
-//         onChange={(e) => handleChange(e, 'payment')}
-//       />
-//     </FormControl>
-//     <FormControl>
-//       <FormLabel>CVV</FormLabel>
-//       <Input
-//         type="text"
-//         name="cvv"
-//         value={paymentDetails.cvv}
-//         onChange={(e) => handleChange(e, 'payment')}
-//       />
-//     </FormControl>
-//     <Button onClick={handleNext}>Next</Button>
-//   </Box>
-// )}
-// {step === 3 && (
-//   <Box>
-//     <Text>Confirm Patient Details:</Text>
-//     <Text>Name: {patientDetails.name}</Text>
-//     <Text>Email: {patientDetails.email}</Text>
-//     <Text>Address: {patientDetails.address}</Text>
-//     <Text>Issue: {patientDetails.issue}</Text>
-
-//     <Text>Confirm Payment Details:</Text>
-//     <Text>Card Holder Name: {paymentDetails.cardHolderName}</Text>
-//     <Text>Card Number: {paymentDetails.cardNumber}</Text>
-//     <Text>Expiry Date: {paymentDetails.expiryDate}</Text>
-//     <Text>CVV: {paymentDetails.cvv}</Text>
-
-//     <Button onClick={handleConfirm}>Pay Securely</Button>
-//   </Box>
-// )}

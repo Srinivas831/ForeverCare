@@ -5,7 +5,7 @@ import {
   HStack,
   IconButton,
 } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   Avatar,
   Link as ChakraLink,
@@ -22,20 +22,27 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogout } from "../reduxAuth/action";
 
  
 export default function NavBar(){
-  const { isAuth, setAuth, setUserData,userData } = useContext(AuthContext);
+  // const { setAuth, setUserData,userData } = useContext(AuthContext);
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
-
+  const isAuth=useSelector((store)=>store.AuthReducer.isAuth);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
 
   const handleLogout = () => {
-    setAuth(false);
-    setUserData({});
+    // setAuth(false);
+    // setUserData({});
+    dispatch(authLogout())
     navigate("/");
   };
 
+  useEffect(()=>{
+    console.log(isAuth);
+  },[isAuth])
   const linkAction = isAuth ? handleLogout : null;
 
   const Paths = [
@@ -82,28 +89,14 @@ export default function NavBar(){
 
           <Box>
           <Link to="/">
-                {/* <Text */}
-                  {/* fontSize="20px" */}
-                  {/* fontWeight="bold" */}
-                  {/* fontFamily="cursive"  */}
-                  {/* color="#27330A" */}
-                  {/* textTransform="uppercase" */}
-                  {/* letterSpacing="0.1rem" */}
-                  {/* _hover={{ */}
-                    {/* textDecoration: "none", */}
-                    {/* color: "#E6EED3", */}
-                    {/* transition: "color 0.5s ease", */}
-                  {/* }} */}
-                {/* > */}
-                  {/* Forever Care */}
-                {/* </Text> */}
+              
                 <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x9j5guxzzgksruid010e.png" alt="Logo" width={"240px"} height={"200px"} />
                 {/* https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9xz2guks0iij3w6ez7uw.png */}
                 {/* "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/06rfxiejshilc7yovjww.png" */}
               </Link>
           </Box>
           
-          <HStack spacing={8} alignItems={"center"} color={isAuth ? "white":"black"}>
+          <HStack spacing={8} alignItems={"center"} color={"black"}>
             
             <HStack
               as={"nav"}
@@ -153,10 +146,9 @@ export default function NavBar(){
                    color: "#329938"
                  }}
                >
-                 {userData.name}
+                 {/* {userData.name} */}
                </MenuItem>
                   <MenuItem
-                 
                     _hover={{
                       textDecoration: "none",
                       color: "#329938"
@@ -175,6 +167,7 @@ export default function NavBar(){
                   </MenuItem>
                   </Link>
                   <MenuDivider />
+                  
                   <MenuItem
                    onClick={linkAction}
                     _hover={{
@@ -194,7 +187,7 @@ export default function NavBar(){
                 _hover={{
                   textDecoration: 'none',
                   color: "#329938"
-                }} color={isAuth ? "white":"black"}>
+                }} color={"black"}>
                 SIGN-IN
                 </ChakraLink>
               </Link>

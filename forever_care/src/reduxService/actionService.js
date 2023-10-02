@@ -1,7 +1,7 @@
 import { SERVICE_ERROR, SERVICE_LOADING, SERVICE_SUCCESS } from "./actionTypeService"
 import axios from "axios";
 
-let baseUrl="http://localhost:8080/posts";
+let baseUrl="https://forevercare.onrender.com/posts";
 
 export const serviceData=(newData)=>(dispatch)=>{
     dispatch({type:SERVICE_LOADING});

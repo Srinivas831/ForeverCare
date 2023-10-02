@@ -69,9 +69,9 @@ const ServicesData = () => {
     const dispatch = useDispatch();
    
     const dataFromStore = useSelector((store) => ({
-        data: store.isSuccessService,
-        loading: store.isLoadingService,
-        error: store.isErrorService,
+        data: store.ServiceReducer.isSuccessService,
+        loading: store.ServiceReducer.isLoadingService,
+        error: store.ServiceReducer.isErrorService,
     }), shallowEqual);
 
     // if (dataFromStore.loading) {
@@ -101,10 +101,11 @@ const ServicesData = () => {
     const [messages, setMessages] = useState(() => refreshMessages());
 
     React.useEffect(() => {
-        ref.current.ownerDocument.body.scrollTop = 0;
-        setMessages(refreshMessages());
+        if (ref.current) { // Add a null check here
+            ref.current.ownerDocument.body.scrollTop = 0;
+            setMessages(refreshMessages());
+        }
     }, [value, setMessages]);
-
     return (
         <DIV>
             <div className='outerDiv'>
@@ -112,8 +113,8 @@ const ServicesData = () => {
                     {dataFromStore.data?.map((ele) => <ServiceCard key={ele.id} {...ele} />)}
                 </div>
                 {dataFromStore?.data ? <div className='innerDiv2'>
-                    <ThemeProvider theme={theme}>
-                        <Box  sx={{ pb: 7 }} ref={ref} position={"fixed"} mr={"20px"} borderRadius={"10px"} bgcolor={"thistle"} >
+                    <ThemeProvider theme={theme} >
+                        <Box sx={{ pb: 7 }} ref={ref} position={"fixed"} mr={"20px"} borderRadius={"10px"} bgcolor={"thistle"} >
                             <h2 style={{ marginTop: "30px", fontSize: "20px", textAlign: "center" }}>Testimonials</h2>
                             <CssBaseline />
                             <List sx={{ maxHeight: '440px', overflowY: 'auto' }}>
@@ -165,6 +166,7 @@ const DIV = styled.div`
         /* background-color:rgb(237,243,248); */
         color: black;
         padding: 20px 20px 20px 5px;
+        
     }
 
     @media screen and (min-width:200px) and  (max-width:600px) {

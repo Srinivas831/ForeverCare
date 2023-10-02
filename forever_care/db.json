@@ -2,9 +2,10 @@
   "users":[
     {
       "id":1,
+     "name":"",
       "email":"",
       "password":"",
-      "userDetails":[]
+      "userDetails":[{}]
     }
   ],
   "posts": [
