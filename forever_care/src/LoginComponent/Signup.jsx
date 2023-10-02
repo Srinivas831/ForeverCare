@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { Heading, Input, Stack, Link} from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 
 export const SignUp = () => {
     const nav = useNavigate();
   const [isEmailRegistered, setIsEmailRegistered] = useState(false);
-
   const handleSignUp = (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const email = formData.get("email");
     const password = formData.get("password");
+    const name=formData.get('name');
 
     if (!email || !password) {
         alert("Please enter valid credentials.");
@@ -22,23 +22,25 @@ export const SignUp = () => {
       }
 
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const isExistingEmail = existingUsers.some(user => user.email === email);
+    // const isExistingEmail = existingUsers.some(user => user.email === email);
 
-    if (isExistingEmail) {
-      setIsEmailRegistered(true);
-    } else {
-      setIsEmailRegistered(false);
-
-      const newUser = { email, password };
-      const updatedUsers = [...existingUsers, newUser];
+    // if (isExistingEmail) {
+      // setIsEmailRegistered(true);
+    // } else {
+      // setIsEmailRegistered(false);
+      const userDetails=[];
+      const newUser = { email, password,name,userDetails };
+      // const updatedUsers = [...existingUsers, newUser];
+      const updatedUsers = newUser;
 
       localStorage.setItem("users", JSON.stringify(updatedUsers));
 
       alert("Account created successfully!");
 
+      axios.post("https://forevercare.onrender.com/users",newUser);
       nav("/signin");
     }
-  };
+  // };
 
 
       const style = {
@@ -51,7 +53,7 @@ export const SignUp = () => {
                     <Stack spacing={5}>
                         <Heading>Sign Up</Heading>
                         <div className="name">
-                            <Input     
+                            <Input    name="name"
                                 placeholder='Enter First Name'
                                 _placeholder={{ opacity: 1, color: 'teal' }}
                             />

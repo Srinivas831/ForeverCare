@@ -5,7 +5,7 @@ let initial={
     isSuccessService:[],
     isErrorService:false
 }
-const reducer = (state=initial,action) => {
+export const reducer = (state=initial,action) => {
  switch(action.type){
     case SERVICE_LOADING:{
         return{...state,isLoadingService:true}
@@ -19,5 +19,3 @@ const reducer = (state=initial,action) => {
     default:return state
  }
 }
-
-export default reducer
