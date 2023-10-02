@@ -22,7 +22,7 @@ export const SignIn = () => {
     // const foundUser = users.find(
     //   (user) => user.email === email && user.password === password
     // );
-    
+
     if (users.email==email && users.password==password) {
       alert("Sign in successful!");
       dispatch(authCheck());
