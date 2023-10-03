@@ -10,6 +10,8 @@ export const SignIn = () => {
   const nav = useNavigate();
   const isAuth = useSelector((store) => store.AuthReducer.isAuth);
 
+  const toast = useToast();
+
   const handleSignIn = async (event) => {
     event.preventDefault();
 
@@ -17,14 +19,22 @@ export const SignIn = () => {
     const password = event.target.password.value;
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
+
     const foundUser = users.find(
         (user) => user.email === email && user.password === password
       );
       console.log(email);
     if (foundUser) {
-      alert("Sign in successful!");
+      toast({
+        title: "Sign In Successful",
+        description: "You have successfully signed in.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
       nav(-2);
       dispatch(authCheck(email));
+
     } else {
       alert("Invalid email or password. Please try again.");
     }

@@ -10,6 +10,7 @@ export const SignUp = () => {
   const [isEmailRegistered, setIsEmailRegistered] = useState(false);
 
   const handleSignUp = (event) => {
+
   event.preventDefault();
   const formData = new FormData(event.target);
   const email = formData.get("email");
@@ -18,7 +19,15 @@ export const SignUp = () => {
   const userDetails=[];
 
   if (!email || !password) {
-      alert("Please enter valid credentials.");
+
+      toast({
+        title: "Error",
+        description: "Please enter valid credentials.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
       return;
     }
 
@@ -35,12 +44,17 @@ export const SignUp = () => {
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
     axios.post("https://forevercare.onrender.com/users",newUser);
-    alert("Account created successfully!");
+      toast({
+        title: "Success",
+        description: "Account created successfully!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
 
     nav("/signin");
   }
 }
-
       const style = {
         paddingTop : "40px"
       };
