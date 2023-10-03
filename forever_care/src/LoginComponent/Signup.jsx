@@ -36,7 +36,9 @@ export const SignUp = () => {
       // const updatedUsers = [...existingUsers, newUser];
       const updatedUsers = newUser;
       localStorage.setItem("users", JSON.stringify(updatedUsers));
+
       // alert("Account created successfully!");
+
       toast({
         title: "Success",
         description: "Account created successfully!",
