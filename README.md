@@ -10,7 +10,7 @@ In this way, the website can be easily navigated according to our needs. this pr
 ### Contribution
 
 A team of 3 members created this project over  the course of six days.
-** TEAM MEMBERS **
+**TEAM MEMBERS**
 
 1. [Srinivasan H](https://github.com/Srinivas831)
 2. [Aditya Choudhary](https://github.com/Anshuldhakate)
@@ -67,4 +67,34 @@ We can check the booked appointment in the profile section.
 
 ![CheckAppointment](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/dc6be089-31c4-4ad2-aba8-40842c12f0f9)
 ![Appointment](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/24fc91b8-5a1d-441d-b2a3-2deee5dba579)
+
+[**`SignIn and SignUp`**](/forever_care/src/LoginComponent/): SignUp page where the customer can create a new account for fast, seamless booking of appointments. SignIn page where existing users can sign in so that their experience is uninterrupted.
+
+![SignUp](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/e9f304b2-1574-4421-9fae-c4e7bd6ff14d)
+![SignIn](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/9d937685-7722-4435-a88c-563b56e6904d)
+
+[**`Package`**](/forever_care/src/Pages/Packages.jsx): A page where we can subscribe to different pages so that we can get better services. 
+
+![Packages](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/2e3053fa-259e-4c94-85d9-eb565bbdd576)
+
+[**`About`**](/forever_care/src/Pages/About.jsx): A page where we get all the details of our Hospital.
+
+![About page](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/666cbb68-7b96-4d07-bac1-e91a957dc75e)
+
+[**`Contact`**](/forever_care/src/Pages/Contact.jsx): Contact details are present through which we can connect the Hospital.
+
+![Contact](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/370b9f6f-5ecf-4365-becf-a3ae343f0bb4)
+
+
+Each and every page of the website  is ***`responsive`*** in nature for all devices.
+
+
+Contributions to groovy-airplane-6414 are welcome! If you would like to contribute, please follow these guidelines:
+
+### Fork the repository
++ Create a new branch for your changes
++ Make your changes and commit them with clear commit messages
++ Push your changes to your fork
++ Create a pull request with a clear description of your changes
++ Credits
 
