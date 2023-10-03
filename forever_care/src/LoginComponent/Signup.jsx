@@ -9,18 +9,20 @@ export const SignUp = () => {
     const nav = useNavigate();
   const [isEmailRegistered, setIsEmailRegistered] = useState(false);
 
-  const handleSignUp = (event) => {
-  event.preventDefault();
-  const formData = new FormData(event.target);
-  const email = formData.get("email");
-  const password = formData.get("password");
-  const name=formData.get('name');
-  const userDetails=[];
-
   if (!email || !password) {
-      alert("Please enter valid credentials.");
-      return;
-    }
+    
+    toast({
+      title: "Error",
+      description: "Please enter valid credentials.",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
+    return;
+  }
+
+  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+  // const isExistingEmail = existingUsers.some(user => user.email === email);
 
   const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
   const isExistingEmail = existingUsers.some(user => user.email === email);
@@ -30,9 +32,15 @@ export const SignUp = () => {
   } else {
     setIsEmailRegistered(false);
 
-    const newUser = { email, password,name,userDetails };
-    const updatedUsers = [...existingUsers, newUser];
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    // alert("Account created successfully!");
+
+    toast({
+      title: "Success",
+      description: "Account created successfully!",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
 
     axios.post("https://forevercare.onrender.com/users",newUser);
     alert("Account created successfully!");
