@@ -9,7 +9,6 @@ const Card = ({image}) => {
      w={"full"}
      overflow="hidden"
     position="relative"
-    // boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
     >
         <Box
             position="absolute"
@@ -17,7 +16,6 @@ const Card = ({image}) => {
             left={0}
             right={0}
             bottom={0}
-            // bgGradient="linear(to top, rgba(133, 173, 35, 1) 0%, rgba(133, 173, 35, 1) 50%)"
         />
         <Stack spacing={3} height={"100%"}> 
             <Image src={image} alt="patient" height={"100%"} objectFit={"cover"} width="100%"></Image>

@@ -8,40 +8,38 @@ import axios from "axios";
 export const SignUp = () => {
     const nav = useNavigate();
   const [isEmailRegistered, setIsEmailRegistered] = useState(false);
+
   const handleSignUp = (event) => {
-    event.preventDefault();
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const name=formData.get('name');
+  const userDetails=[];
 
-    const formData = new FormData(event.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const name=formData.get('name');
-
-    if (!email || !password) {
-        alert("Please enter valid credentials.");
-        return;
-      }
-
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    // const isExistingEmail = existingUsers.some(user => user.email === email);
-
-    // if (isExistingEmail) {
-      // setIsEmailRegistered(true);
-    // } else {
-      // setIsEmailRegistered(false);
-      const userDetails=[];
-      const newUser = { email, password,name,userDetails };
-      // const updatedUsers = [...existingUsers, newUser];
-      const updatedUsers = newUser;
-
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-      alert("Account created successfully!");
-
-      axios.post("https://forevercare.onrender.com/users",newUser);
-      nav("/signin");
+  if (!email || !password) {
+      alert("Please enter valid credentials.");
+      return;
     }
-  // };
 
+  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+  const isExistingEmail = existingUsers.some(user => user.email === email);
+
+  if (isExistingEmail) {
+    setIsEmailRegistered(true);
+  } else {
+    setIsEmailRegistered(false);
+
+    const newUser = { email, password,name,userDetails };
+    const updatedUsers = [...existingUsers, newUser];
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+    axios.post("https://forevercare.onrender.com/users",newUser);
+    alert("Account created successfully!");
+
+    nav("/signin");
+  }
+}
 
       const style = {
         paddingTop : "40px"
@@ -144,3 +142,33 @@ const DIV = styled.div`
     
   `
 
+// const handleSignUp = (event) => {
+//   event.preventDefault();
+
+//   const formData = new FormData(event.target);
+//   const email = formData.get("email");
+//   const password = formData.get("password");
+
+//   if (!email || !password) {
+//       alert("Please enter valid credentials.");
+//       return;
+//     }
+
+//   const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+//   const isExistingEmail = existingUsers.some(user => user.email === email);
+
+//   if (isExistingEmail) {
+//     setIsEmailRegistered(true);
+//   } else {
+//     setIsEmailRegistered(false);
+
+//     const newUser = { email, password };
+//     const updatedUsers = [...existingUsers, newUser];
+
+//     localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+//     alert("Account created successfully!");
+
+//     nav("/signin");
+//   }
+// };

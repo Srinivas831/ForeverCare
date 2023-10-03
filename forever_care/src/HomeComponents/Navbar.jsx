@@ -1,11 +1,17 @@
 import {
   Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
   HStack,
   IconButton,
+  DrawerContent
 } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import {
   Avatar,
   Link as ChakraLink,
@@ -24,27 +30,58 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogout } from "../reduxAuth/action";
+import axios from "axios";
 
  
 export default function NavBar(){
-  // const { setAuth, setUserData,userData } = useContext(AuthContext);
+
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const btnRef = useRef();
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
   const isAuth=useSelector((store)=>store.AuthReducer.isAuth);
+  let isBooked=useSelector((store)=>store.AuthReducer.isBooked);
+  const [userDetails, setUserDetails] = useState([]);
+
+
   const navigate = useNavigate();
   const dispatch=useDispatch()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [size, setSize] = useState('sm');
+  const storedUsers = localStorage.getItem("users");
+const userName = storedUsers ? JSON.parse(storedUsers) : [];
+let userIndex; // Declare userIndex outside the axios.get callback
+  console.log("navv",userName)
+  let emailFromStore=useSelector((store)=>store.AuthReducer.storedEmail);
+  console.log("aaa",emailFromStore)
+ let foundName=userName.find((user)=>user.email==emailFromStore);
+ console.log("navvvvv",foundName)
+
 
   const handleLogout = () => {
-    // setAuth(false);
-    // setUserData({});
     dispatch(authLogout())
     navigate("/");
   };
 
   useEffect(()=>{
-    console.log(isAuth);
-  },[isAuth])
-  const linkAction = isAuth ? handleLogout : null;
+    console.log("navbarA",isAuth);
+    console.log("navbarB",isBooked);
 
+    if(isAuth || isBooked){
+      axios.get('https://forevercare.onrender.com/users')
+              .then((response) => { console.log("1st fetch",response.data)
+                const existingData = response.data;
+                 userIndex = existingData.find(user => user.email === emailFromStore);
+                console.log("navbarUserBookedDetails",userIndex)
+                if (userIndex) {      
+                  setUserDetails(userIndex.userDetails);
+                  isBooked=false;
+                }
+                console.log("3rd",userIndex.userDetails);
+              })
+    }
+  },[isAuth,isBooked])
+  const linkAction = isAuth ? handleLogout : null;
+ 
   const Paths = [
     { path: "/", onClick: linkAction, label: "Home" },
     { path: "/services", onClick: linkAction, label: "Service" },
@@ -53,8 +90,15 @@ export default function NavBar(){
     { path: "/contact", onClick: linkAction, label: "Contact" },
   ];
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const openDrawer = () => {
+    setIsDrawerVisible(true);
+  };
 
+  const closeDrawer = () => {
+    setIsDrawerVisible(false);
+  };
+
+  
   return (
 
    <div>
@@ -68,17 +112,14 @@ export default function NavBar(){
         bg="transparent"
       >
       <Box
-      //  bg={"rgba(133, 173, 35, 0.5)"} 
-      // bg={"rgb(1,213,162)"}
+
       bg={"rgb(237,243,248)"}
       px={4} color={"white"} fontWeight={"bold"} >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between" }>
           <IconButton
             as = {HamburgerIcon}
-            // bg = "#6A8A1C"
             _hover={{
               textDecoration: "none",
-              // bg: "#AED943",
             }}
             size={"md"}
             icon={isOpen ? "" :""}
@@ -89,10 +130,7 @@ export default function NavBar(){
 
           <Box>
           <Link to="/">
-              
                 <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x9j5guxzzgksruid010e.png" alt="Logo" width={"240px"} height={"200px"} />
-                {/* https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9xz2guks0iij3w6ez7uw.png */}
-                {/* "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/06rfxiejshilc7yovjww.png" */}
               </Link>
           </Box>
           
@@ -109,9 +147,10 @@ export default function NavBar(){
                   <ChakraLink px={2}
                   py={1}
                   rounded={'md'}
+                  fontWeight={"500"}
+                  letterSpacing={1.2}
                   _hover={{
                     textDecoration: 'none',
-                    // bg: "#AED943",
                     color:"#329938"
                   }}>
                     {ele.label}
@@ -131,11 +170,13 @@ export default function NavBar(){
                   minW={0}
                 >
                   <Avatar
+                  bgColor={"black"}
                     size={"sm"}
                     src={
-                      "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                      ""
                     }
                   />
+                {/* <Button bgColor={"#009E60"} color={"white"}></Button> */}
                 </MenuButton>
                
                 <MenuList color={"black"}>
@@ -143,10 +184,9 @@ export default function NavBar(){
                  
                  _hover={{
                    textDecoration: "none",
-                   color: "#329938"
+                   color: "#2e9e33"
                  }}
                >
-                 {/* {userData.name} */}
                </MenuItem>
                   <MenuItem
                     _hover={{
@@ -156,8 +196,10 @@ export default function NavBar(){
                   >
                     User Details
                   </MenuItem>
-                  <Link to="/appointments">
+                  {/* <Link to="/appointments"> */}
                   <MenuItem
+                  onClick={openDrawer}
+                  ref={btnRef}
                     _hover={{
                       textDecoration: "none",
                       color: "#329938"
@@ -165,7 +207,32 @@ export default function NavBar(){
                   >
                   My Appointments
                   </MenuItem>
-                  </Link>
+                  {/* </Link> */}
+                  {isDrawerVisible && (
+        <Drawer
+          isOpen={isDrawerVisible}
+          placement='right'
+          onClose={closeDrawer}
+          finalFocusRef={btnRef}
+        >
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader>My Appointments</DrawerHeader>
+                   <DrawerBody>
+                   {userDetails.map((ele, index) => (
+              <div key={index}>
+                <p>Name: {ele.name}</p>
+                <p>Email: {ele.email}</p>
+                <p>Address: {ele.address}</p>
+                <p>Issue: {ele.issue}</p>
+              </div>
+            ))}
+                    </DrawerBody>
+
+          </DrawerContent>
+        </Drawer>
+      )}
                   <MenuDivider />
                   
                   <MenuItem
@@ -182,13 +249,18 @@ export default function NavBar(){
             ) : (
               <Link key={"login"} to="/signup" >
                 <ChakraLink
+              
                 px={2}
                 py={1}
                 _hover={{
                   textDecoration: 'none',
-                  color: "#329938"
+                  color: "black"
                 }} color={"black"}>
-                SIGN-IN
+                  <Button bgColor={"#009E60"} color={"white"}  _hover={{
+                  textDecoration: 'none',
+                  color: "black",
+                  bg:"white"
+                }} >SIGN-IN</Button>
                 </ChakraLink>
               </Link>
             )}

@@ -17,15 +17,14 @@ export const SignIn = () => {
     const password = event.target.password.value;
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    console.log(users.email)
-    console.log(users.password)
-    // const foundUser = users.find(
-    //   (user) => user.email === email && user.password === password
-    // );
-
-    if (users.email==email && users.password==password) {
+    const foundUser = users.find(
+        (user) => user.email === email && user.password === password
+      );
+      console.log(email);
+    if (foundUser) {
       alert("Sign in successful!");
-      dispatch(authCheck());
+      nav(-2);
+      dispatch(authCheck(email));
     } else {
       alert("Invalid email or password. Please try again.");
     }
@@ -35,7 +34,7 @@ export const SignIn = () => {
     // This useEffect will run when isAuth state changes
     if (isAuth) {
       console.log("isAuth is true");
-      nav("/");
+      // nav("/");
     } else {
       console.log("isAuth is false");
     }
