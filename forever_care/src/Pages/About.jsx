@@ -19,12 +19,35 @@ export const About = ()=>{
             </div>
             </div>
 <hr />
+<h1>Our Mission & Visson</h1>
         <div className="mission">
-            <h1>Our Misson & Visson</h1>
-            <p>"Our mission at Forever Care is to provide accessible, compassionate, and high-quality healthcare to enhance the well-being of our community. We strive to deliver personalized, patient-centric care that meets the diverse needs of individuals and families, ensuring their comfort, trust, and confidence in our services. With a commitment to integrity, innovation, and excellence, we aim to improve and save lives through cutting-edge medical practices, continuous education, and community engagement." <br />
-            "Our vision at Forever Care is to be a leading healthcare institution recognized for delivering exceptional medical services, pioneering advancements in healthcare, and positively impacting the communities we serve. We envision a future where healthcare is accessible, equitable, and patient-focused, promoting a culture of wellness and a higher quality of life. Through continuous growth, a dedicated team, and a patient-centric approach, we aspire to set new standards in healthcare excellence and become a beacon of hope and healing for all."</p>
-            <img src="https://themes.muffingroup.com/be/clinic2/wp-content/uploads/2017/08/home_clinic2_treatment2.jpg" alt="" />
+        <div className="mission1">
+                <img src="https://themes.muffingroup.com/be/healthy/wp-content/uploads/2019/01/home_healthy_pic28.jpg" alt="" />
             </div>
+            <div className="mission2">
+           <h2>Mission</h2>
+            <p>"Our mission at Forever Care is to provide accessible, compassionate, and high-quality healthcare to enhance the well-being of our community. We strive to deliver personalized, patient-centric care that meets the diverse needs of individuals and families, ensuring their comfort, trust, and confidence in our services."</p>
+            </div>
+            </div>
+
+            <hr />
+
+             <div className="vission">
+
+             
+                <div className="vission1">
+                    <h2>Vission</h2>
+                <p>"Our vision at Forever Care is to be a leading healthcare institution recognized for delivering exceptional medical services, pioneering advancements in healthcare, and positively impacting the communities we serve. We envision a future where healthcare is accessible, equitable, and patient-focused, promoting a culture of wellness and a higher quality of life."</p>
+                </div>
+                <div className="vission2">
+                <img src="https://themes.muffingroup.com/be/clinic2/wp-content/uploads/2017/08/home_clinic2_treatment2.jpg" alt="" />
+                </div>
+
+                
+             </div>
+            
+            
+            
 <hr />
             <div className="facilities">
                 <h1>Facilities and Technology</h1>
@@ -60,23 +83,28 @@ export const About = ()=>{
 }
 
 const DIV= styled.div`
-
+    width: 100%;
+    margin: auto;
      margin-top: 80px;
      align-items: center;
      font-family: 'Poppins', sans-serif;
+     text-align: justify;
+    
  
     h1{
         font-size: 30px;
         font-weight: bold;
         margin-top: 30px;
-        text-align: center
+        text-align: center;
+        font-size: 30px;
         
     }
     p {
         margin-top: 10px;
-        font-size: 20px;
+        font-size: 18   px;
         justify-content: center;
         padding: 5%;
+        
     }
 
     .about{
@@ -88,18 +116,19 @@ const DIV= styled.div`
         flex-direction: row;
         @media (max-width: 768px) {
     flex-direction: column;
+    text-align: justify;
     align-items: center;
   }
        
     }
     .abouttxt{
-         
+        
          width: 70%;   
          text-justify: ce
      }
      .abouttxt p{
          margin-top: 10px;
-         font-size: 20px;
+         font-size: 18px;
      }
      .aboutimg{
          margin-top: 70px;
@@ -107,16 +136,75 @@ const DIV= styled.div`
          margin: auto;
          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
      }
-
      .mission{
-        padding: 2%;
+        display: flex;
+        gap: 2%;
+        width: 90%;
+        margin: auto;
+        @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: justify;
+    align-items: center;
+  }
      }
-   .mission img{
-        width: 85%;
-        padding: 3%;
-       margin: auto;
-       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    }
+     .vission{
+        display: flex;
+        gap: 2%;
+        width: 90%;
+        margin: auto;
+        @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: justify;
+    align-items: center;
+  }
+     }
+
+     .mission1{
+        width: 50%;
+        margin: auto;
+       margin-bottom: 20px;
+      margin-top: 10px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      margin-top: 5%;
+      padding: 1%;
+      
+     }
+     .mission2 {
+      width: 50%;
+      margin: auto;
+      text-align: center;
+      padding:3%;
+      text-align: justify;
+     }
+     
+     .mission2 h2{
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+     }
+     
+     .vission2{
+        width: 60%;
+        margin: auto;
+        padding: 2%;
+      margin-top: 10px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      margin-top: 5%;
+      margin-bottom: 20px;
+     }
+     .vission1 {
+      width: 50%;
+      margin: auto;
+      text-align: center;
+      padding:3%;
+      text-align: justify;
+     }
+     
+     .vission1 h2{
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+     }
     
 .facilities{
     text-align: center;
