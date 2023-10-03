@@ -14,6 +14,7 @@ export const SignUp = () => {
     const password = formData.get("password");
     const name=formData.get('name');
     if (!email || !password) {
+
       toast({
         title: "Error",
         description: "Please enter valid credentials.",
@@ -23,6 +24,7 @@ export const SignUp = () => {
       });
       return;
     }
+    
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
     // const isExistingEmail = existingUsers.some(user => user.email === email);
     // if (isExistingEmail) {

@@ -9,6 +9,7 @@ export const SignIn = () => {
   const nav = useNavigate();
   const isAuth = useSelector((store) => store.AuthReducer.isAuth);
   const toast = useToast();
+
   const handleSignIn = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
@@ -19,6 +20,7 @@ export const SignIn = () => {
     // const foundUser = users.find(
     //   (user) => user.email === email && user.password === password
     // );
+    
     if (users.email === email && users.password === password) {
       toast({
         title: "Sign In Successful",
