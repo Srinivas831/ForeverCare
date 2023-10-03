@@ -16,6 +16,7 @@ import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Copyright(props) {
   return (
@@ -33,7 +34,7 @@ function Copyright(props) {
 const tiers = [
   {
     title: 'Basic',
-    price: '39',
+    price: '399',
     description: [
       'Consultation with doctor',
       'Laboratory and diagnostic tests',
@@ -46,7 +47,7 @@ const tiers = [
   {
     title: 'Pro',
     subheader: 'Most popular',
-    price: '59',
+    price: '599',
     description: [
       'ALL from BASIC +',
       'Day and night emergency care',
@@ -59,7 +60,7 @@ const tiers = [
   },
   {
     title: 'Enterprise',
-    price: '99',
+    price: '999',
     description: [
       'ALL from PRO +',
       'Rehabilitation after injury',
@@ -76,30 +77,36 @@ const tiers = [
 const defaultTheme = createTheme();
 
 export default function Pricing() {
-
+  const isAuth=useSelector((store)=>store.AuthReducer.isAuth);
     const navigate = useNavigate();
 
   const handlePayNowClick = () => {
-    navigate("/pay");
+    if(isAuth){
+      navigate("/pay");
+    }
+    else{
+      navigate('/signin');
+    }
+    
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={defaultTheme} >
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
     
       {/* Hero unit */}
-      <Container disableGutters maxWidth="md" component="main" sx={{ pt: 8, pb: 6 }}>
+      <Container disableGutters maxWidth="md" component="main" sx={{ pt: 4, pb: 6 }}>
         <Typography
           component="h1"
-          variant="h2"
+          variant="h4"
           align="center"
           color="green"
           gutterBottom
         >
           Health Packages
         </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" component="p">
+        <Typography variant="p" align="center" color="text.secondary" component="p">
         Discover our specially curated healthcare packages designed to provide comprehensive and specialized care for our patients. We believe in making healthcare accessible and tailored to your needs, and our packages are a testament to that commitment.
         </Typography>
       </Container>
@@ -141,7 +148,7 @@ export default function Pricing() {
                     }}
                   >
                     <Typography component="h2" variant="h3" color="green">
-                      ${tier.price}
+                      ₹ {tier.price}
                     </Typography>
                     <Typography variant="h6" color="green">
                       /mo
@@ -161,9 +168,8 @@ export default function Pricing() {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}
+                  <Button style={{backgroundColor:"#009E60"}}  fullWidth variant={tier.buttonVariant}
                   onClick={() => handlePayNowClick(tier.title)} 
-                  
                   >
                     {tier.buttonText}
                   </Button>

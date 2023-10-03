@@ -70,7 +70,6 @@ export const Services = () => {
         {item?.map((ele, index) => {
           return <div key={index} >
             <Flex
-              // bg="#edf3f8"
               width="500"
               _dark={{
                 bg: "#3e3e3e"
@@ -82,7 +81,6 @@ export const Services = () => {
             >
 
               <Box onClick={() => handleBox(ele, index)}
-                // w={400}
                 cursor={"-webkit-grab"}
                 bg="white"
                 _dark={{
@@ -101,9 +99,13 @@ export const Services = () => {
                   fit="contain"
                   src={ele.image}
                   alt="avatar"
+                  _hover={{
+                    transform: "scale(1.15)"
+                  }}
+                  transition={"transform 0.3s ease-in-out"}
                 />
 
-                <Box py={5} textAlign="center" style={{ letterSpacing: 1.5, fontWeight: 500 }}>
+                <Box py={5} textAlign="center" _hover={{color:"#009E60"}} style={{ letterSpacing: 1.5, fontWeight: 500 }}>
                   {ele.name}
                 </Box>
               </Box>
@@ -125,17 +127,17 @@ export const Services = () => {
             <ModalBody>
               <Text>
                 {/* {imageArray[selectedServiceIndex].name} Details */}
-                <Stack spacing={4} justifyContent={"center"} alignItems={"center"} m={"auto"}>
-                  <Button style={{ width: "60%", letterSpacing: 1.4 }} onClick={(e) => handleLocation("BENGALURU")}><FaMapMarkerAlt style={{ marginRight: '8px' }} />BENGALURU</Button>
-                  <Button style={{ width: "60%", letterSpacing: 1.4 }} onClick={(e) => handleLocation("CHENNAI")} > <FaMapMarkerAlt style={{ marginRight: '8px' }} />CHENNAI</Button>
-                  <Button style={{ width: "60%", letterSpacing: 1.4 }} onClick={(e) => handleLocation(e.target.textContent)}><FaMapMarkerAlt style={{ marginRight: '8px' }} />HYDERABAD</Button>
+                <Stack spacing={4} justifyContent={"center"}  alignItems={"center"} m={"auto"}>
+                  <Button _hover={{bgColor:"#009E60", color:"white"}} style={{ width: "60%", letterSpacing: 1.4 }} onClick={(e) => handleLocation("BENGALURU")}><FaMapMarkerAlt style={{ marginRight: '8px' }} />BENGALURU</Button>
+                  <Button _hover={{bgColor:"#009E60", color:"white"}} style={{ width: "60%", letterSpacing: 1.4 }} onClick={(e) => handleLocation("CHENNAI")} > <FaMapMarkerAlt style={{ marginRight: '8px' }} />CHENNAI</Button>
+                  <Button _hover={{bgColor:"#009E60", color:"white"}} style={{ width: "60%", letterSpacing: 1.4 }} onClick={(e) => handleLocation(e.target.textContent)}><FaMapMarkerAlt style={{ marginRight: '8px' }} />HYDERABAD</Button>
                 </Stack>
               </Text>
               {/* Add more details about the selected service here */}
             </ModalBody>
             <ModalFooter justifyContent="center">
               {/* <Button onClick={onClose}>Close</Button> */}
-              <Button onClick={handle}>Proceed</Button>
+              <Button _hover={{bgColor:"#009E60", color:"white"}} backgroundColor={"#009E60"} color={"white"} onClick={handle}>Proceed</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

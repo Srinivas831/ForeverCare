@@ -8,12 +8,6 @@ export const serviceData=(newData)=>(dispatch)=>{
 
     console.log(newData.speciality)
     console.log(newData.location)
-    // axios.get(url).then((response) => { console.log(response.data)
-    // const filteredData = response.data.filter((ele) => ele.speciality == newData.speciality && ele.location == newData.location )
-    // console.log(filteredData)
-    //     dispatch({type:SERVICE_SUCCESS,payload:filteredData})}).catch((err)=>dispatch({type:SERVICE_ERROR}))
-    // axios.get("http://localhost:8080/posts",newData).then((res)=>{console.log(res.data)
-    //  dispatch({type:SERVICE_SUCCESS,payload:res.data})}).catch((err)=>dispatch({type:SERVICE_ERROR}))
 
      dispatch({ type: SERVICE_LOADING });
 

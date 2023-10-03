@@ -3,10 +3,13 @@ import {
   Box,FormControl,FormLabel,Input,Textarea,Button,ChakraProvider,CSSReset,Text,Progress,useToast,Stack,HStack,VStack,
 } from '@chakra-ui/react';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { bookingConfirmed } from '../reduxAuth/action';
 
 function MultiStepForm() {
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-
+  // const users = JSON.parse(localStorage.getItem("users")) || [];
+  const emailFromStore=useSelector((store)=>store.AuthReducer.storedEmail);
+  const dispatch=useDispatch();
   const [step, setStep] = useState(1);
   const [patientDetails, setPatientDetails] = useState({
     name: '',
@@ -23,6 +26,7 @@ function MultiStepForm() {
   const [progress, setProgress] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toast = useToast();
+  const [isBooked,setIsBooked]=useState(false);
 
   const handleChange = (e, formType) => {
     const { name, value } = e.target;
@@ -76,20 +80,27 @@ function MultiStepForm() {
       address: patientDetails.address,
       issue: patientDetails.issue,
       }
-
+      console.log("str",emailFromStore)
       axios.get('https://forevercare.onrender.com/users')
       .then((response) => { console.log(response.data)
         const existingData = response.data;
-        const userIndex = existingData.find(user => user.email === users.email);
+        const userIndex = existingData.find(user => user.email === emailFromStore);
         console.log("new",userIndex)
-        const userId=userIndex.id;
 
-        if (userIndex.id !== undefined) {
-          axios.patch(`https://forevercare.onrender.com/users/${userId}`, {
-            userIndex:newPatientDetail,
-          })
+        if (userIndex) {
+        const userId=userIndex.id;
+        const updatedData={
+          ...userIndex,userDetails:[...userIndex.userDetails,newPatientDetail]
+        }
+          axios.patch(`https://forevercare.onrender.com/users/${userId}`,updatedData)
             .then((response) => {
+              
               setIsSubmitting(false);
+              setIsBooked(true);
+              setTimeout(()=>{
+                setIsBooked(false);
+              },2000)
+              dispatch(bookingConfirmed())
               toast({
                 title: 'Appointment booked!',
                 description: 'Your appointment has been successfully booked.',
@@ -280,7 +291,8 @@ function MultiStepForm() {
                 <Text fontWeight="bold">Patient Details:</Text>
                 <Text>Name: {patientDetails.name}</Text>
                 <Text>Phone No: {patientDetails.number}</Text>
-                <Text>Amount: 500</Text>
+                <Text>Address:{patientDetails.address}</Text>
+                {/* <Text>Amount: 500</Text> */}
 
               </Stack>
               <HStack spacing={8}>
