@@ -24,6 +24,7 @@ export const SignUp = () => {
       });
       return;
     }
+    
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
     // const isExistingEmail = existingUsers.some(user => user.email === email);
     // if (isExistingEmail) {
