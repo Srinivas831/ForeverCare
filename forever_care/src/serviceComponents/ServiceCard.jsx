@@ -10,15 +10,23 @@ import { Box, Button, Flex, HStack,chakra,  Modal,
 import styled from '@emotion/styled';
 import React, { memo, useState } from 'react'
 import MultiStepForm from './Pay';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const ServiceCard = memo(({education,image,language,location,name,speciality,experience}) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [showAmountTooltip, setShowAmountTooltip] = useState(false);
-  
+  const isAuth=useSelector((store)=>store.AuthReducer.isAuth);
+  const nav=useNavigate();
   function handleAppointment() {
-    setIsModalOpen(true); 
+    if(isAuth){
+      setIsModalOpen(true); 
+    }
+    else{
+      nav("/signup");
+    }
   }
 
   function handleCloseModal() {
@@ -29,7 +37,6 @@ const ServiceCard = memo(({education,image,language,location,name,speciality,exp
   return (
 
 <Flex
-  // bg="#edf3f8"
   _dark={{
     bg: "#3e3e3e",
   }}
@@ -140,17 +147,17 @@ const ServiceCard = memo(({education,image,language,location,name,speciality,exp
             fontSize={{ base: "sm" }}
             padding={{ base: 1.5 }}
             _hover={{
-              bg: "teal.500", // Background color on hover
+              
               color: "white", // Text color on hover
             }}
+            backgroundColor={"#009E60"} color={"white"}
             onMouseEnter={() => {
               setShowAmountTooltip(true); // Show the tooltip when hovering
             }}
             onMouseLeave={() => {
               setShowAmountTooltip(false); // Hide the tooltip when not hovering
             }}
-            onClick={handleAppointment}
-          >
+            onClick={handleAppointment}>
             BOOK APPOINTMENT
           </Button>
         </Tooltip>

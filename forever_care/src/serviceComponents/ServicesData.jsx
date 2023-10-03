@@ -17,6 +17,7 @@ import Avatar from '@mui/material/Avatar';
 import styled from '@emotion/styled';
 import { useSearchParams } from 'react-router-dom';
 import { serviceData } from '../reduxService/actionService';
+import { SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 
 const messageExamples = [
     {
@@ -74,14 +75,7 @@ const ServicesData = () => {
         error: store.ServiceReducer.isErrorService,
     }), shallowEqual);
 
-    // if (dataFromStore.loading) {
-    //     return (
-    //         <img
-    //             src="https://i.gifer.com/ZKZg.gif"
-    //             style={{ margin: "auto", alignItems: "center", width: "5vw" }}
-    //         />
-    //     );
-    // }
+    
 
     useEffect(() => {
         const speciality = searchParams.get("speciality");
@@ -100,12 +94,42 @@ const ServicesData = () => {
     const ref = useRef(null);
     const [messages, setMessages] = useState(() => refreshMessages());
 
-    React.useEffect(() => {
-        if (ref.current) { // Add a null check here
-            ref.current.ownerDocument.body.scrollTop = 0;
-            setMessages(refreshMessages());
-        }
-    }, [value, setMessages]);
+
+    if (dataFromStore.loading) {
+        // return (
+        //     <img
+        //         src="https://i.gifer.com/ZKZg.gif"
+        //         style={{ margin: "auto", alignItems: "center", width: "5vw" }}
+        //     />
+        // );
+        return(
+            <>
+            <Box padding='6' mt={"100px"} boxShadow='lg' bg='white' width={"50%"} ml={"10%"}>
+  <SkeletonCircle size='10' />
+  <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2'  />
+</Box>
+<Box padding='6' boxShadow='lg' bg='white' width={"50%"} ml={"10%"}>
+  <SkeletonCircle size='10' />
+  <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+</Box>
+<Box padding='6' boxShadow='lg' bg='white' width={"50%"} ml={"10%"}>
+  <SkeletonCircle size='10' />
+  <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+</Box>
+<Box padding='6' boxShadow='lg' bg='white' width={"50%"} ml={"10%"}>
+  <SkeletonCircle size='10' />
+  <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+</Box>
+            </>
+        )
+    }
+
+//    useEffect(() => {
+//         if (ref.current) { // Add a null check here
+//             ref.current.ownerDocument.body.scrollTop = 0;
+//             setMessages(refreshMessages());
+//         }
+//     }, [value, setMessages]);
     return (
         <DIV>
             <div className='outerDiv'>
@@ -114,8 +138,10 @@ const ServicesData = () => {
                 </div>
                 {dataFromStore?.data ? <div className='innerDiv2'>
                     <ThemeProvider theme={theme} >
-                        <Box sx={{ pb: 7 }} ref={ref} position={"fixed"} mr={"20px"} borderRadius={"10px"} bgcolor={"thistle"} >
-                            <h2 style={{ marginTop: "30px", fontSize: "20px", textAlign: "center" }}>Testimonials</h2>
+                        <Box sx={{ pb: 7 }} ref={ref} position={"fixed"} mr={"20px"} borderRadius={"10px"}  bgcolor={"#009E60"} >
+                            <h2 style={{ marginTop: "30px", 
+                            color:"white",
+                            fontSize: "20px", textAlign: "center" }}>Testimonials</h2>
                             <CssBaseline />
                             <List sx={{ maxHeight: '440px', overflowY: 'auto' }}>
                                 {messages.map(({ primary, secondary, person }, index) => (
@@ -124,8 +150,8 @@ const ServicesData = () => {
                                             <Avatar alt="Profile Picture" src={person} />
                                         </ListItemAvatar>
                                         <ListItemText
-                                            primary={<span style={{ color: "black" }}>{primary}</span>}
-                                            secondary={<span style={{ color: "black" }}>{secondary}</span>} />
+                                            primary={<span style={{ color: "whitesmoke" }}>{primary}</span>}
+                                            secondary={<span style={{ color: "whitesmoke" }}>{secondary}</span>} />
                                     </ListItem>
                                 ))}
                             </List>
