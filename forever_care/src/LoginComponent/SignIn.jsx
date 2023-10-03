@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, Heading, Input, Stack, Link, Checkbox } from "@chakra-ui/react";
+import { Box, Heading, Input, Stack, Link, Checkbox, useToast } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import {  useNavigate } from "react-router-dom/dist";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ export const SignIn = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const isAuth = useSelector((store) => store.AuthReducer.isAuth);
+  const toast = useToast(); 
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -23,11 +24,23 @@ export const SignIn = () => {
     //   (user) => user.email === email && user.password === password
     // );
 
-    if (users.email==email && users.password==password) {
-      alert("Sign in successful!");
+    if (users.email === email && users.password === password) {
+      toast({
+        title: "Sign In Successful",
+        description: "You have successfully signed in.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
       dispatch(authCheck());
     } else {
-      alert("Invalid email or password. Please try again.");
+      toast({
+        title: "Invalid Credentials",
+        description: "Please enter valid email and password.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 

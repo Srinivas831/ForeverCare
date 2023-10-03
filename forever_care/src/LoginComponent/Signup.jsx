@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Heading, Input, Stack, Link} from "@chakra-ui/react";
+import { Heading, Input, Stack, Link, useToast} from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +7,7 @@ import axios from "axios";
 
 export const SignUp = () => {
     const nav = useNavigate();
+    const toast = useToast();
   const [isEmailRegistered, setIsEmailRegistered] = useState(false);
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -17,9 +18,16 @@ export const SignUp = () => {
     const name=formData.get('name');
 
     if (!email || !password) {
-        alert("Please enter valid credentials.");
-        return;
-      }
+    
+      toast({
+        title: "Error",
+        description: "Please enter valid credentials.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
 
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
     // const isExistingEmail = existingUsers.some(user => user.email === email);
@@ -35,7 +43,15 @@ export const SignUp = () => {
 
       localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-      alert("Account created successfully!");
+      // alert("Account created successfully!");
+
+      toast({
+        title: "Success",
+        description: "Account created successfully!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
 
       axios.post("https://forevercare.onrender.com/users",newUser);
       nav("/signin");
