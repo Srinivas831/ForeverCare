@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { Heading, Input, Stack, Link, useToast} from "@chakra-ui/react";
+import { Heading, Input, Stack, Link} from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+
 export const SignUp = () => {
     const nav = useNavigate();
-    const toast = useToast();
   const [isEmailRegistered, setIsEmailRegistered] = useState(false);
+
   const handleSignUp = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const name=formData.get('name');
-    if (!email || !password) {
+
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const name=formData.get('name');
+  const userDetails=[];
+
+  if (!email || !password) {
 
       toast({
         title: "Error",
@@ -23,19 +28,22 @@ export const SignUp = () => {
         isClosable: true,
       });
       return;
+      return;
     }
 
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    // const isExistingEmail = existingUsers.some(user => user.email === email);
-    // if (isExistingEmail) {
-      // setIsEmailRegistered(true);
-    // } else {
-      // setIsEmailRegistered(false);
-      const userDetails=[];
-      const newUser = { email, password,name,userDetails };
-      // const updatedUsers = [...existingUsers, newUser];
-      const updatedUsers = newUser;
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
+  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+  const isExistingEmail = existingUsers.some(user => user.email === email);
+
+  if (isExistingEmail) {
+    setIsEmailRegistered(true);
+  } else {
+    setIsEmailRegistered(false);
+
+    const newUser = { email, password,name,userDetails };
+    const updatedUsers = [...existingUsers, newUser];
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+    axios.post("https://forevercare.onrender.com/users",newUser);
       toast({
         title: "Success",
         description: "Account created successfully!",
@@ -43,13 +51,14 @@ export const SignUp = () => {
         duration: 3000,
         isClosable: true,
       });
-      axios.post("https://forevercare.onrender.com/users",newUser);
-      nav("/signin");
-    }
-  // };
+
+    nav("/signin");
+  }
+}
       const style = {
         paddingTop : "40px"
       };
+
     return (
         <DIV className="signup" style={style}>
                 <form onSubmit={handleSignUp}>
@@ -65,27 +74,33 @@ export const SignUp = () => {
                                 _placeholder={{ opacity: 1, color: 'teal' }}
                             />
                        </div>
+
                         <Input
                             type="email"
                             name="email"
                             placeholder='Enter E-Mail'
                             _placeholder={{ opacity: 1, color: 'teal' }}
                         />
+
                         <Input
                             type="password"
                             name="password"
                             placeholder='Enter Password'
                             _placeholder={{ opacity: 1, color: 'teal' }}
                         />
+
                         <Input
                             placeholder='Confirm Password'
                             _placeholder={{ opacity: 1, color: 'teal' }}
                         />
+
                         <button >Sign up</button>
+
                         <Link color='teal.500' href='/signin'>
                             Already have an account? SignIn
                         </Link>
                     </Stack>
+
                 </form>
                 {isEmailRegistered && (
         <div style={{ color: "red", marginTop: "10px" }}>Email is already registered. Please use a different email.</div>
@@ -93,9 +108,11 @@ export const SignUp = () => {
         </DIV>
     )
 }
+
 const DIV = styled.div`
    text-align: center;
    font-family: 'Poppins', sans-serif;
+   
     Input{
         height: 45px;
         width: 100%;
@@ -106,6 +123,7 @@ const DIV = styled.div`
         text-align: start;
         font-size: 100%;
         color: black;
+    
     }
     button{
         background-color: #85AD23;
@@ -122,16 +140,49 @@ const DIV = styled.div`
       border: 1px solid green;
       padding: 2%;
       @media (max-width: 768px) {
-      width: 90%;
+      width: 90%; 
     }
     }
     button:hover{
-      background-color: #B6D89F;
+      background-color: #b6d89f;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
+
     .name{
     display: flex;
     gap: 2%;
     width: 100%;
     }
+    
   `
+
+// const handleSignUp = (event) => {
+//   event.preventDefault();
+
+//   const formData = new FormData(event.target);
+//   const email = formData.get("email");
+//   const password = formData.get("password");
+
+//   if (!email || !password) {
+//       alert("Please enter valid credentials.");
+//       return;
+//     }
+
+//   const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+//   const isExistingEmail = existingUsers.some(user => user.email === email);
+
+//   if (isExistingEmail) {
+//     setIsEmailRegistered(true);
+//   } else {
+//     setIsEmailRegistered(false);
+
+//     const newUser = { email, password };
+//     const updatedUsers = [...existingUsers, newUser];
+
+//     localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+//     alert("Account created successfully!");
+
+//     nav("/signin");
+//   }
+// };
