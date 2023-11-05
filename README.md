@@ -13,7 +13,7 @@ A team of 3 members created this project over  the course of six days.
 **TEAM MEMBERS**
 
 1. [Srinivasan H](https://github.com/Srinivas831)
-2. [Aditya Choudhary](https://github.com/Anshuldhakate)
+2. [Aditya Choudhary](https://github.com/Aditya-Choudhary0)
 3. [Anshul Dhakate](https://github.com/Anshuldhakate)
 
 ### Deployed Link
