@@ -38,7 +38,7 @@ Forever Care is designed to be user-friendly and easy to navigate. The website i
 
 [**`Home`**](/forever_care/src/Pages/Home.jsx): Landing Page with the details about our services and different departments and doctors. There is an FAQ section that helps clear our problems.
 
-![Landing_Image](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/ab96307e-63be-4799-8c80-555c0368922f)
+[Landing_Image](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/ab96307e-63be-4799-8c80-555c0368922f)
 ![Landing_Image2](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/13b6386a-8387-4cfa-8f80-641c4b4e3db6)
 ![FAQ](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/6ba3182e-fc6c-468c-8262-fe79fd230d2e)
 ![footer](https://github.com/Srinivas831/overwrought-skin-2799/assets/113030961/08588b57-59bd-46da-b4ff-bea3a11791ea)
